@@ -7,12 +7,13 @@
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Black Dashboard') }}</title>
+        <title>{{ config('app.name', 'Orient | Orientation L2 L3') }}</title>
         <!-- Favicon -->
         <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('black') }}/img/apple-icon.png">
         <link rel="icon" type="image/png" href="{{ asset('black') }}/img/favicon.png">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
         <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
         <!-- Icons -->
         <link href="{{ asset('black') }}/css/nucleo-icons.css" rel="stylesheet" />
@@ -39,7 +40,8 @@
             </form>
         @else
             @include('layouts.navbars.navbar')
-            <div class="wrapper wrapper-full-page">
+
+            <div class="wrapper wrapper-full-page" style="/*background-image:linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),url('{{ asset('black') }}/img/bbz.jpg');*/ background-image:linear-gradient(to bottom, rgba(0, 0, 0, 0.52), rgba(117, 19, 93, 0.73)),url('{{ asset('black') }}/img/bbz.jpg'); background-origin: no-repeat;background-size: 100%;background-attachment: fixed;">
                 <div class="full-page {{ $contentClass ?? '' }}">
                     <div class="content">
                         <div class="container">

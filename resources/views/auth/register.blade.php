@@ -41,7 +41,7 @@
             <div class="card card-register card-white">
                 <div class="card-header">
                     <img class="card-img" src="{{ asset('black') }}/img/card-primary.png" alt="Card image">
-                    <h4 class="card-title">{{ __('Register') }}</h4>
+                    <h4 class="card-title">{{ __('S\'inscrire') }}</h4>
                 </div>
                 <form class="form" method="post" action="{{ route('register') }}">
                     @csrf
