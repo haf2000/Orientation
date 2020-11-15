@@ -41,7 +41,7 @@
         @else
             @include('layouts.navbars.navbar')
 
-            <div class="wrapper wrapper-full-page" style="/*background-image:linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),url('{{ asset('black') }}/img/bbz.jpg');*/ background-image:linear-gradient(to bottom, rgba(0, 0, 0, 0.52), rgba(117, 19, 93, 0.73)),url('{{ asset('black') }}/img/bbz.jpg'); background-origin: no-repeat;background-size: 100%;background-attachment: fixed;">
+            <div id="backgroundimg" class="wrapper wrapper-full-page" style="background-image:linear-gradient(to bottom, rgba(0, 0, 0, 0.52), rgba(117, 19, 93, 0.73)),url('{{ asset('black') }}/img/bbz.jpg'); background-origin: no-repeat;background-size: 100%;background-attachment: fixed;">
                 <div class="full-page {{ $contentClass ?? '' }}">
                     <div class="content">
                         <div class="container">

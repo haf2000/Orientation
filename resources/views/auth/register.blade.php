@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'register-page', 'page' => __('Register Page'), 'contentClass' => 'register-page'])
+@extends('layouts.app')
 
 @section('content')
     <div class="row">
@@ -39,10 +39,11 @@
         </div>
         <div class="col-md-7 mr-auto">
             <div class="card card-register card-white">
-                <div class="card-header">
-                    <img class="card-img" src="{{ asset('black') }}/img/card-primary.png" alt="Card image">
-                    <h4 class="card-title">{{ __('S\'inscrire') }}</h4>
+                <div class="card-header justify-content-center text-center">
+                    <!-- LOGO -->
+
                 </div>
+                <p class="text-dark text-center mb-2"><strong>Inscription</strong></p>
                 <form class="form" method="post" action="{{ route('register') }}">
                     @csrf
 
@@ -53,7 +54,7 @@
                                     <i class="tim-icons icon-single-02"></i>
                                 </div>
                             </div>
-                            <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}">
+                            <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nom') }}">
                             @include('alerts.feedback', ['field' => 'name'])
                         </div>
                         <div class="input-group{{ $errors->has('email') ? ' has-danger' : '' }}">
@@ -71,7 +72,7 @@
                                     <i class="tim-icons icon-lock-circle"></i>
                                 </div>
                             </div>
-                            <input type="password" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ __('Password') }}">
+                            <input type="password" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ __('Mot de passe') }}">
                             @include('alerts.feedback', ['field' => 'password'])
                         </div>
                         <div class="input-group">
@@ -80,19 +81,19 @@
                                     <i class="tim-icons icon-lock-circle"></i>
                                 </div>
                             </div>
-                            <input type="password" name="password_confirmation" class="form-control" placeholder="{{ __('Confirm Password') }}">
+                            <input type="password" name="password_confirmation" class="form-control" placeholder="{{ __('Confirmer mot de passe') }}">
                         </div>
                         <div class="form-check text-left">
                             <label class="form-check-label">
                                 <input class="form-check-input" type="checkbox">
                                 <span class="form-check-sign"></span>
-                                {{ __('I agree to the') }}
-                                <a href="#">{{ __('terms and conditions') }}</a>.
+                                {{ __('J\'accepte les') }}
+                                <a href="#">{{ __('termes et conditions') }}</a>.
                             </label>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary btn-round btn-lg">{{ __('Get Started') }}</button>
+                    <div class="card-footer" style="text-align: left;"> 
+                     <button type="submit" class="btn btn-primary btn-round btn-lg" style="background:rgba(185,147,214,1);font-weight: normal;width: 40%;">{{ __('S\'inscrire') }}</button>
                     </div>
                 </form>
             </div>
