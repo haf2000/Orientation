@@ -15,7 +15,7 @@
                                 <br>
                                <div class="row justify-content-center text-center">
                                  <a href="{{ route('login') }}" style="width: 50%;">
-                                     <button type="submit" class="btn btn-primary btn-lg btn-block mb-3 text-center" style="background:  rgba(185,147,214,1);font-weight: normal;/* background: #3498db;width: 50%;*/">{{ __('Connectez-vous !') }}</button>
+                                     <button type="submit" class="btn btn-primary btn-lg btn-block mb-3 text-center" style="background:  rgba(185,147,214,1);font-weight: normal;">{{ __('Connectez-vous !') }}</button>
 
                                  </a>  
                                </div>

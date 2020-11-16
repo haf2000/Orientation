@@ -22,6 +22,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
+Route::get('/gm', 'GmController@gm')->name('gm');
+Route::get('/gp', 'GpController@gp')->name('gp');
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {

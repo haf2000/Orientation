@@ -54,7 +54,7 @@
                                     <i class="tim-icons icon-single-02"></i>
                                 </div>
                             </div>
-                            <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nom') }}">
+                            <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nom(doit être sous forme : nom prenom)') }}">
                             @include('alerts.feedback', ['field' => 'name'])
                         </div>
                         <div class="input-group{{ $errors->has('email') ? ' has-danger' : '' }}">

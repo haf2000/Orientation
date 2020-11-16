@@ -87,7 +87,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6 col-md-12">
+    <!--    <div class="col-lg-6 col-md-12">
             <div class="card card-tasks">
                 <div class="card-header ">
                     <h6 class="title d-inline">Tasks(5)</h6>
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body ">
+                 <div class="card-body ">
                     <div class="table-full-width table-responsive">
                         <table class="table">
                             <tbody>
@@ -238,8 +238,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-6 col-md-12">
+        </div> -->
+
+        <div class="col-lg-12 col-md-12">
             <div class="card ">
                 <div class="card-header">
                     <h4 class="card-title">Simple Table</h4>
