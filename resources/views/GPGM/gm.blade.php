@@ -1,107 +1,77 @@
 @extends('layouts.app', ['page' => __('Génie Mécanique'), 'pageSlug' => 'gm'])
 
 @section('content')
-    <div class="row justify-content-center text-center">
-    	<div  class="col-lg-4 card-body">
-    	
-    		<div class="btn btn-primary btn-lg btn-block mb-3 text-center" style="background: rgb(140,166,189);
-background: radial-gradient(circle, rgba(140,166,189,1) 0%, rgba(185,147,214,1) 100%);font-weight: lighter;font-family: 'Montserrat';">
-    	<br>		
-          <h3><b> Section 1 (H) </b></h3>
-    	<br>	
-        
-        </div>
-    	</div>
-    	<!-- ------------------------------------- -->
-<div  class="col-lg-4 card-body">
-    		<div class="btn btn-primary btn-lg btn-block mb-3 text-center" style="background: rgb(140,166,189);
-background: radial-gradient(circle, rgba(140,166,189,1) 0%, rgba(185,147,214,1) 100%);">
-    	<br>		
-          <span><b> Section 2 (I) </b></span>
-    	<br> 		
-        
-        </div>
-    	</div>
 
-    	<!-- ------------------------------------- -->
-<div  class="col-lg-4 card-body">
-    		<div class="btn btn-primary btn-lg btn-block mb-3 text-center" style="background: rgb(140,166,189);
-background: radial-gradient(circle, rgba(140,166,189,1) 0%, rgba(185,147,214,1) 100%);">
-    	<br>		
-          <span><b> Section 3 (J) </b></span>
-    	<br> 	
-        
-        </div>
+
+<div class="row justify-content-center text-center">
+<div class="font-icon-list col-lg-4 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+      <div class="font-icon-detail">
+<p style="font-size: 18px;"><a href="#sec1" rel="modal:open">Section 1 (H)</a></p>
+      </div>
     </div>
-    	<!-- ------------------------------------- -->
-<div  class="col-lg-4 card-body">
-    		<div class="btn btn-primary btn-lg btn-block mb-3 text-center" style="background: rgb(140,166,189);
-background: radial-gradient(circle, rgba(140,166,189,1) 0%, rgba(185,147,214,1) 100%);">
-    	<br>		
-          <span><b> Section 4 (K) </b></span>
-    	<br>
-        
-        </div>
-    	</div>
-    	<!-- ------------------------------------- -->
-
-    	<div  class="col-lg-4 card-body">
-    		<div class="btn btn-primary btn-lg btn-block mb-3 text-center" style="background: rgb(140,166,189);
-background: radial-gradient(circle, rgba(140,166,189,1) 0%, rgba(185,147,214,1) 100%);">
-    	<br>		
-          <span><b> Section 5 (L) </b></span>
-    	<br> 	
-        
-        </div>
-    	</div>
-
-    	
-     
+<!-- --------------------------------------------------------------- -->
+<div class="font-icon-list col-lg-4 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+      <div class="font-icon-detail">
+<p style="font-size: 18px;"><a href="#sec2" rel="modal:open">Section 2 (I)</a></p>
+      </div>
+    </div>
+    <!-- ----------------------------------------------------------------- -->
+<div class="font-icon-list col-lg-4 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+      <div class="font-icon-detail">
+<p style="font-size: 18px;"><a href="#sec3" rel="modal:open">Section 3 (J)</a></p>
+      </div>
+    </div>
+    <!-- ----------------------------------------------------------------- -->
+<div class="font-icon-list col-lg-4 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+      <div class="font-icon-detail">
+<p style="font-size: 18px;"><a href="#sec4" rel="modal:open">Section 4 (K)</a></p>
+      </div>
+    </div>
+    <!-- ----------------------------------------------------------------- -->
+<div class="font-icon-list col-lg-4 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+      <div class="font-icon-detail">
+<p style="font-size: 18px;"><a href="#sec5" rel="modal:open">Section 5 (L)</a></p>
+      </div>
     </div>
 
-<hr style="background-color: rgba(255,255,255,0.6);">
-    <!-- 
-    <div class="card-body">
-        <div class="alert alert-primary">
-          <span>
-            <b> Primary - </b> This is a regular notification made with ".alert-primary"</span>
-        </div>
-
-
-        <div class="alert alert-info">  
-          <span>
-            <b> Info - </b> This is a regular notification made with ".alert-info"</span>
-        </div>
-
-
-        <div class="alert alert-success">
-             <span>
-            <b> Success - </b> This is a regular notification made with ".alert-success"</span>
-        </div>
-
-
-        <div class="alert alert-warning">
-            <span>
-            <b> Warning - </b> This is a regular notification made with ".alert-warning"</span>
-        </div>
-
-        <div class="alert alert-danger">
-          <span>
-            <b> Danger - </b> This is a regular notification made with ".alert-danger"</span>
-        </div>
-      </div> -->
-
-
-<!-- ------------------------------------------------------------------------------ -->
-<!-- Modal HTML embedded directly into document -->
-<div id="ex1" class="modal">
-  <p>Thanks for clicking. That felt good.</p>
-  <a href="#" rel="modal:close">Close</a>
 </div>
-<!-- Link to open the modal -->
-<!-- ------------------------------------------------------------------------------ -->
+    <!-- ----------------------------MODAL 1------------------------------------- -->
 
-<p><a href="#ex1" rel="modal:open">Open Modal</a></p>
+<div id="sec1" class="modal" style="background-color: #fff;">
+         
+<form class="form" method="post" action="{{ route('login') }}">
+            @csrf
+
+            <div class="card card-login card-white">
+                
+                <div class="card-body">
+                    <p class="text-dark text-center mb-2"><strong>Importer les fichiers excel nécessaires</strong></p>
+                     @php
+
+                     @endphp
+
+                </div>
+                <div class="card-footer">
+                    
+                        <button type="submit" class="btn btn-primary btn-lg btn-block mb-3 text-center" style="background:  rgba(185,147,214,1);font-weight: normal;">{{ __('Effectuer le traitement') }}</button>
+
+                 </div>
+            </div>
+        </form>
+
+  <a href="#" rel="modal:close" style="font-size: 20px;">Fermer</a>
+  
+</div>
+    <!-- ----------------------------MODAL 2------------------------------------- -->
+    <!-- ----------------------------MODAL 3------------------------------------- -->
+    <!-- ----------------------------MODAL 4------------------------------------- -->
+    <!-- ----------------------------MODAL 5------------------------------------- -->
+
+
+
+<br>
+<hr style="background-color: rgba(255,255,255,0.4);">
+<!-- ------------------------------------------------------------------    -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <!-- jQuery Modal -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
