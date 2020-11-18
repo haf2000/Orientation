@@ -26,6 +26,9 @@ Route::get('/gm', 'GmController@gm')->name('gm');
 Route::get('/gp', 'GpController@gp')->name('gp');
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
+//Route::get('export', 'ImportExportController@export')->name('export');
+Route::post('import', 'ImportL2GMController@import')->name('import');
+
 Route::group(['middleware' => 'auth'], function () {
 		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'PageController@icons']);
 		Route::get('maps', ['as' => 'pages.maps', 'uses' => 'PageController@maps']);

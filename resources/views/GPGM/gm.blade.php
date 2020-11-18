@@ -1,7 +1,32 @@
 @extends('layouts.app', ['page' => __('Génie Mécanique'), 'pageSlug' => 'gm'])
 
 @section('content')
+<div class="row" style="display: inline;">
+  
+<div class="card card-white">
+                
+                <div class="card-body">
+                    <p class="text-dark text-center mb-2" style="text-align: left;"><strong>Importer la fiche de voeux</strong></p>
+                     
+                    <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+                {{ csrf_field() }}
 
+                   <p class="text-dark mb-2" style="text-align: left;"><strong>Fiche de voeux : </strong></p>
+                <input type="file" name="file1" class="form-control">
+
+                <br>
+                <button type="submit" class="btn btn-success">Importer</button>
+                
+                   </form>
+
+                </div>
+               
+            </div>
+
+</div>
+<hr style="background-color: rgba(255,255,255,0.4);">
+
+ <!---------------------------------------------------------------------------->
 
 <div class="row justify-content-center text-center">
 <div class="font-icon-list col-lg-4 col-md-3 col-sm-4 col-xs-6 col-xs-6">
@@ -46,20 +71,29 @@
                 
                 <div class="card-body">
                     <p class="text-dark text-center mb-2"><strong>Importer les fichiers excel nécessaires</strong></p>
-                     @php
+                     
+                    <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+                {{ csrf_field() }}
 
-                     @endphp
+                <p class="text-dark mb-2" style="text-align: left;"><strong>PV de délibération L2 de cette année : </strong></p>
+                <input type="file" name="file" class="form-control"><br>
+                <!-- <p class="text-dark mb-2" style="text-align: left;"><strong>PV de délibération L3 de cette année : </strong></p>
+                <input type="file" name="file2" class="form-control"> -->
+                <br>
+                <button type="submit" class="btn btn-success">Importer les 2 fichiers</button>
+                
+                   </form>
 
                 </div>
                 <div class="card-footer">
-                    
-                        <button type="submit" class="btn btn-primary btn-lg btn-block mb-3 text-center" style="background:  rgba(185,147,214,1);font-weight: normal;">{{ __('Effectuer le traitement') }}</button>
+                   
+  <a href="#" rel="modal:close" style="font-size: 15px;">Fermer</a> 
+                    <!-- <button type="submit" class="btn btn-primary btn-lg btn-block mb-3 text-center" style="background:  rgba(185,147,214,1);font-weight: normal;">{{ __('Effectuer le traitement') }}</button> -->    
 
                  </div>
             </div>
         </form>
 
-  <a href="#" rel="modal:close" style="font-size: 20px;">Fermer</a>
   
 </div>
     <!-- ----------------------------MODAL 2------------------------------------- -->
@@ -71,6 +105,16 @@
 
 <br>
 <hr style="background-color: rgba(255,255,255,0.4);">
+<!-- ------------------------------------------------------------------    -->
+<div class="row justify-content-center">
+  <div class="col-lg-4"></div>
+  <div class="col-lg-4">
+    
+    <button type="submit" class="btn btn-primary btn-lg btn-block mb-3 text-center" style="background:  rgba(185,147,214,1);font-weight: normal;">{{ __('Effectuer le traitement') }}</button>
+  </div>
+  <div class="col-lg-4"></div>
+</div>
+
 <!-- ------------------------------------------------------------------    -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <!-- jQuery Modal -->
