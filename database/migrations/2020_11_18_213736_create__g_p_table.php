@@ -21,9 +21,9 @@ class CreateGPTable extends Migration
            $table->string('choix1')->nullable();
            $table->string('choix2')->nullable();
            $table->string('choix3')->nullable();
-           $table->float('moyS1');
-           $table->float('moyS2');
-           $table->float('moyAn');
+            $table->string('moy_s1')->nullable();
+           $table->string('moy_s2')->nullable();
+           $table->string('moy_an')->nullable();
            $table->integer('session');
            $table->integer('r')->default('0');
            $table->float('mc')->default('0.0');

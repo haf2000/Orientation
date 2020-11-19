@@ -15,16 +15,15 @@ class GMImport implements ToModel,WithHeadingRow
     */
     public function model(array $row)
     {
-        return new GM([
            return new GM([
-            'matricule'     => $row['Matricule'],
-            'nom_prenom'     => $row['Noms & Prénoms'],
-            'moyS1'     => $row['Moyenne S1'],
-            'moyS2'     => $row['Moyenne S2'],
-            'moyAn'     => $row['Moyenne An'],
-            'resultat'     => $row['Resultat'],
-            'session'     => $row['Session'],
-        ]);
+            'matricule'     => $row['matricule'],
+            'nom_prenom'     => $row['nom_prenom'],
+            'moy_s1'     => $row['moy_s1'] ,
+            'moy_s2'     => $row['moy_s2'] ,
+            'moy_an'     => $row['moy_an'] ,
+            'resultat'     => $row['resultat'],
+            'session'     => $row['session'],
+       
         ]);
     }
 }

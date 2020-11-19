@@ -27,7 +27,10 @@ Route::get('/gp', 'GpController@gp')->name('gp');
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 //Route::get('export', 'ImportExportController@export')->name('export');
+//Route::post('import', 'ImportL2GMController@import')->name('import');
+//Route::post('import2', 'ImportL2GMController@test')->name('import2');
 Route::post('import', 'ImportL2GMController@import')->name('import');
+
 
 Route::group(['middleware' => 'auth'], function () {
 		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'PageController@icons']);

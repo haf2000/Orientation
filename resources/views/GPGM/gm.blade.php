@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <p class="text-dark text-center mb-2" style="text-align: left;"><strong>Importer la fiche de voeux</strong></p>
                      
-                    <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('home') }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                    <p class="text-dark mb-2" style="text-align: left;"><strong>Fiche de voeux : </strong></p>
@@ -64,25 +64,25 @@
 
 <div id="sec1" class="modal" style="background-color: #fff;">
          
-<form class="form" method="post" action="{{ route('login') }}">
-            @csrf
+<form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+           {{ csrf_field() }}
 
-            <div class="card card-login card-white">
+            <div class="card card-white">
                 
                 <div class="card-body">
                     <p class="text-dark text-center mb-2"><strong>Importer les fichiers excel nécessaires</strong></p>
                      
-                    <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
-                {{ csrf_field() }}
+                  
+                
 
                 <p class="text-dark mb-2" style="text-align: left;"><strong>PV de délibération L2 de cette année : </strong></p>
                 <input type="file" name="file" class="form-control"><br>
                 <!-- <p class="text-dark mb-2" style="text-align: left;"><strong>PV de délibération L3 de cette année : </strong></p>
                 <input type="file" name="file2" class="form-control"> -->
                 <br>
-                <button type="submit" class="btn btn-success">Importer les 2 fichiers</button>
+                <button class="btn btn-success">Importer les 2 fichiers</button>
                 
-                   </form>
+                  
 
                 </div>
                 <div class="card-footer">
