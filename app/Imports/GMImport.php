@@ -23,6 +23,7 @@ class GMImport implements ToModel,WithHeadingRow
             'moy_an'     => $row['moy_an'] ,
             'resultat'     => $row['resultat'],
             'session'     => $row['session'],
+            'section'   => $row['section'],
        
         ]);
     }
