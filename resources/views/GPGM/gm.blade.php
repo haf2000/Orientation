@@ -6,7 +6,7 @@
 <div class="card card-white">
                 
                 <div class="card-body">
-                    <p class="text-dark text-center mb-2" style="text-align: left;"><strong>Entrer la fiche de voeux et les PVs L3 de cette année</strong></p>
+                    <p class="text-dark text-center mb-2" style="text-align: left;"><strong>Entrer la fiche de voeux et les PVs de délibération L3 de cette année</strong></p>
                      
                     <form action="{{ route('importFVGM') }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -42,8 +42,10 @@
 
 <hr style="background-color: rgba(255,255,255,0.4);">
  <!---------------------------------------------------------------------------->
-
+    <p style="text-align: center;">Entrer le PV de délibération L2 pour chaque section</p>
 <div class="row justify-content-center text-center">
+
+
 <div class="font-icon-list col-lg-4 col-md-3 col-sm-4 col-xs-6 col-xs-6">
       <div class="font-icon-detail">
 <p style="font-size: 18px;"><a href="#sec1" rel="modal:open">Section 1 (H)</a></p>
@@ -106,22 +108,137 @@
   
 </div>
     <!-- ----------------------------MODAL 2------------------------------------- -->
-    <!-- ----------------------------MODAL 3------------------------------------- -->
-    <!-- ----------------------------MODAL 4------------------------------------- -->
-    <!-- ----------------------------MODAL 5------------------------------------- -->
 
+    <div id="sec2" class="modal" style="background-color: #fff;">
+         
+<form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+           {{ csrf_field() }}
+
+            <div class="card card-white">
+                
+                <div class="card-body">
+                    <p class="text-dark text-center mb-2"><strong>Entrer le fichiers excel du PV L2</strong></p>
+                     
+                
+                <p class="text-dark mb-2" style="text-align: left;"><strong>PV de délibération L2 de cette année : </strong></p>
+                <input type="file" name="file" class="form-control"><br>
+                <br>
+                <button class="btn btn-success">Importer le PV L2</button>
+                
+                </div>
+                <div class="card-footer">
+                   
+  <a href="#" rel="modal:close" style="font-size: 15px;">Fermer</a> 
+                   
+
+                 </div>
+            </div>
+        </form>
+
+  
+</div>
+    <!-- ----------------------------MODAL 3------------------------------------- -->
+<div id="sec3" class="modal" style="background-color: #fff;">
+         
+<form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+           {{ csrf_field() }}
+
+            <div class="card card-white">
+                
+                <div class="card-body">
+                    <p class="text-dark text-center mb-2"><strong>Entrer le fichiers excel du PV L2</strong></p>
+                     
+                
+                <p class="text-dark mb-2" style="text-align: left;"><strong>PV de délibération L2 de cette année : </strong></p>
+                <input type="file" name="file" class="form-control"><br>
+                <br>
+                <button class="btn btn-success">Importer le PV L2</button>
+                
+                </div>
+                <div class="card-footer">
+                   
+  <a href="#" rel="modal:close" style="font-size: 15px;">Fermer</a> 
+                   
+
+                 </div>
+            </div>
+        </form>
+
+  
+</div>
+    <!-- ----------------------------MODAL 4------------------------------------- -->
+<div id="sec4" class="modal" style="background-color: #fff;">
+         
+<form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+           {{ csrf_field() }}
+
+            <div class="card card-white">
+                
+                <div class="card-body">
+                    <p class="text-dark text-center mb-2"><strong>Entrer le fichiers excel du PV L2</strong></p>
+                     
+                
+                <p class="text-dark mb-2" style="text-align: left;"><strong>PV de délibération L2 de cette année : </strong></p>
+                <input type="file" name="file" class="form-control"><br>
+                <br>
+                <button class="btn btn-success">Importer le PV L2</button>
+                
+                </div>
+                <div class="card-footer">
+                   
+  <a href="#" rel="modal:close" style="font-size: 15px;">Fermer</a> 
+                   
+
+                 </div>
+            </div>
+        </form>
+
+  
+</div>
+    <!-- ----------------------------MODAL 5------------------------------------- -->
+<div id="sec5" class="modal" style="background-color: #fff;">
+         
+<form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+           {{ csrf_field() }}
+
+            <div class="card card-white">
+                
+                <div class="card-body">
+                    <p class="text-dark text-center mb-2"><strong>Entrer le fichiers excel du PV L2</strong></p>
+                     
+                
+                <p class="text-dark mb-2" style="text-align: left;"><strong>PV de délibération L2 de cette année : </strong></p>
+                <input type="file" name="file" class="form-control"><br>
+                <br>
+                <button class="btn btn-success">Importer le PV L2</button>
+                
+                </div>
+                <div class="card-footer">
+                   
+  <a href="#" rel="modal:close" style="font-size: 15px;">Fermer</a> 
+                   
+
+                 </div>
+            </div>
+        </form>
+
+  
+</div>
 
 
 <br>
 <hr style="background-color: rgba(255,255,255,0.4);">
 <!-- ------------------------------------------------------------------    -->
 <div class="row justify-content-center">
-  <div class="col-lg-4"></div>
-  <div class="col-lg-4">
+  <div class="col-lg-3">
+    <p>Pour effectuer le traitement final</p>
+
+  </div>
+  <div class="col-lg-5">
     
     <a type="submit" class="btn btn-success" href="{{ route('traitement') }}">{{ __('Effectuer le traitement') }}</a>
   </div>
-  <div class="col-lg-4"></div>
+  <div class="col-lg-1"></div>
 </div>
 
 <!-- ------------------------------------------------------------------    -->

@@ -33,8 +33,13 @@ Route::post('import', 'ImportL2GMController@import')->name('import');
 Route::post('importL3GM', 'ImportL3GMController@import')->name('importL3GM');
 Route::post('importFVGM', 'ImportFVGMController@import')->name('importFVGM');
 
-Route::get('/traitement', 'GestionMecaniqueController@pretraitement_traitement')->name('traitement');
+Route::post('importL2GP', 'ImportL2GPController@import')->name('importL2GP');
+Route::post('importL3GP', 'ImportL3GPController@import')->name('importL3GP');
+Route::post('importFVGP', 'ImportFVGPController@import')->name('importFVGP');
 
+
+Route::get('/traitement', 'GestionMecaniqueController@pretraitement_traitement')->name('traitement');
+Route::get('/traitementGP', 'GestionProcedesController@pretraitement_traitement')->name('traitementGP');
 
 Route::group(['middleware' => 'auth'], function () {
 		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'PageController@icons']);
