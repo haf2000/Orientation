@@ -36,14 +36,14 @@ class GestionMecaniqueController extends Controller
           $annee_cours = date("Y"); 
 
 
-         $fiches = DB::table('fichevoeuxgm')-> select('matricule','nom','prenom','choix1','choix2','nationalite')->get();
+         $fiches = DB::table('fichevoeuxgm')-> select('matricule','nom','prenom','choix1','choix2','choix3','nationalite')->get();
 
           foreach ($fiches as $fiche) {
           	$NP = $fiche->nom." ".$fiche->prenom;
             $num_matricule =substr($fiche->matricule,0,2);
             $annee_matricule = "20".$num_matricule;
             $difference = intval($annee_cours)-intval($annee_matricule);
-            if($difference > 0)  
+            if($difference >= 2)  
             	{
                $r = $difference-2;
                if($fiche->nationalite <> "213"){ $r = $r-2; }
@@ -53,7 +53,7 @@ class GestionMecaniqueController extends Controller
  DB::table('gm')-> where([
      ['matricule', '=', $fiche->matricule],
     ['nom_prenom', '=', $NP]
-     ])->update(['r' => $r,'choix1' => $fiche->choix1,'choix2' => $fiche->choix2 ]);
+     ])->update(['r' => $r,'choix1' => $fiche->choix1,'choix2' => $fiche->choix2,'choix3' => $fiche->choix3 ]);
          }
             }
 
