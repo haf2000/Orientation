@@ -23,7 +23,6 @@ class CreateFicheVoeuxGPTable extends Migration
            $table->char('section',1);
            $table->string('choix1');
            $table->string('choix2');
-           $table->string('choix3');
            $table->string('nationalite')->nullable();
             $table->timestamps();
         });

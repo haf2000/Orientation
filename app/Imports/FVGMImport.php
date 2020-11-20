@@ -22,6 +22,7 @@ class FVGMImport implements ToModel,WithHeadingRow
             'anet'     => $row['anet'] ,
             'choix1'     => $row['choix1'] ,
             'choix2'     => $row['choix2'] ,
+            'choix3'     => $row['choix3'] ,
             'origine'     => $row['origine'],            
             'nationalite'     => $row['nationalite'],
             'section'   => $row['section'],

@@ -20,7 +20,6 @@ class CreateGPTable extends Migration
            $table->char('section',1)->nullable();
            $table->string('choix1')->nullable();
            $table->string('choix2')->nullable();
-           $table->string('choix3')->nullable();
             $table->string('moy_s1')->nullable();
            $table->string('moy_s2')->nullable();
            $table->string('moy_an')->nullable();

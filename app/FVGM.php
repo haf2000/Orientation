@@ -8,6 +8,6 @@ class FVGM extends Model
 {
    protected $table = 'fichevoeuxgm';
     protected $fillable = [
-         'matricule' , 'nom','prenom' ,'anet' ,  'origine' , 'section','choix1' ,'choix2' ,'nationalite',
+         'matricule' , 'nom','prenom' ,'anet' ,  'origine' , 'section','choix1' ,'choix2' ,'choix3' ,'nationalite',
     ];
 }
