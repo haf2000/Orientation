@@ -229,16 +229,17 @@
 <br>
 <hr style="background-color: rgba(255,255,255,0.4);">
 <!-- ------------------------------------------------------------------    -->
-<div class="row justify-content-center">
-  <div class="col-lg-3">
-    <p>Pour effectuer le traitement final</p>
-
-  </div>
-  <div class="col-lg-5">
+<div class="row justify-content-center text-center">
+  <div class="col-lg-6">
     
     <a type="submit" class="btn btn-success" href="{{ route('traitement') }}">{{ __('Effectuer le traitement') }}</a>
   </div>
-  <div class="col-lg-1"></div>
+    <div class="col-lg-6">
+    
+    <a type="submit" class="btn btn-success" href="{{ route('refairetraitement') }}">{{ __('Refaire le traitement') }}</a>
+  </div>
+
+
 </div>
 
 <!-- ------------------------------------------------------------------    -->

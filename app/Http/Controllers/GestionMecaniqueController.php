@@ -8,6 +8,9 @@ use App\L3GM;
 use DB;
 class GestionMecaniqueController extends Controller
 {
+
+//----------------------------------Prétraitement-------------------------
+
 //-------------------------------
     public function supp_ajr_l2(){
       GM::where('resultat', '=', 'AJR')->delete();
@@ -22,6 +25,7 @@ class GestionMecaniqueController extends Controller
       where([
      ['matricule', '=', $etudiant->matricule ],
      ['nom_prenom', '=', $etudiant->nom_prenom],
+     ['resultat', '=', "ADC"],
      ])->delete();
         	
          }
@@ -34,7 +38,7 @@ class GestionMecaniqueController extends Controller
         
         // calcul R : années de retard
           $annee_cours = date("Y"); 
-
+          $matricule_errone = '0';
 
          $fiches = DB::table('fichevoeuxgm')-> select('matricule','nom','prenom','choix1','choix2','choix3','nationalite')->get();
 
@@ -45,36 +49,53 @@ class GestionMecaniqueController extends Controller
             $difference = intval($annee_cours)-intval($annee_matricule);
             if($difference >= 2)  
             	{
-               $r = $difference-2;
-               if($fiche->nationalite <> "213"){ $r = $r-2; }
-
-    
-
- DB::table('gm')-> where([
+                if($fiche->nationalite == "213")
+                  { $r = $difference-2; }
+                  else{
+                    if($fiche->nationalite == null){ $r = $difference-2; }else{ $r = $difference-4;}
+                  
+                  }
+              
+      DB::table('gm')-> where([
      ['matricule', '=', $fiche->matricule],
     ['nom_prenom', '=', $NP]
-     ])->update(['r' => $r,'choix1' => $fiche->choix1,'choix2' => $fiche->choix2,'choix3' => $fiche->choix3 ]);
-         }
-            }
+     ])->update(['r' => $r]);  
 
-         // calcul mc = MG * (1-0.04*(R+session/4))
-        DB::statement("UPDATE `gm` SET `mc`= `moy_an`*(1-0.04*(`r`+(`session`/4)))");
+              }
+                 DB::table('gm')-> where([
+     ['matricule', '=', $fiche->matricule],
+    ['nom_prenom', '=', $NP]
+     ])->update(['choix1' => $fiche->choix1,'choix2' => $fiche->choix2,'choix3' => $fiche->choix3,'fichevoeux_remp' => '1']);
+                 }
+                     // calcul mc = MG * (1-0.04*(R+session/4))
+        DB::statement("UPDATE `gm` SET `mc`= `moy_an`*(1-0.04*(`r`+(`session`/4))) WHERE `fichevoeux_remp`= '1' ");
+         
           }
 
-
-           
-         
-    
-
+ //----------------------------------------------------------------------------------
     public function pretraitement_traitement(){
-          
-         self::supp_ajr_l2();    
-         self::supp_doublants_l2l3();
-         self::calcul_mc();
+    
+    //----------------------------------Prétraitement-------------------------
+        // self::supp_ajr_l2();    
+        // self::supp_doublants_l2l3();
+        // self::calcul_mc();
+    //-----------------------------------Traitement---------------------------
 
        
 
 
       return back();
         }
+
+ //----------------------------------------------------------------------------------
+
+public function refaire_traitement(){
+             DB::statement("TRUNCATE TABLE gm");
+             DB::statement("TRUNCATE TABLE l3gm");
+             DB::statement("TRUNCATE TABLE fichevoeuxgm");
+             return back();
+
+        }
+
+
 }
