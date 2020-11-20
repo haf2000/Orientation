@@ -71,7 +71,88 @@ class GestionMecaniqueController extends Controller
         DB::statement("UPDATE `gm` SET `mc`= `moy_an`*(1-0.04*(`r`+(`session`/4))) WHERE `fichevoeux_remp`= '1' ");
          
           }
+ //--------------------------------
+public function calcul_ajr_par_specialiteL3()
+{
 
+  $ajournes = DB::table('l3gm')
+  ->where('resultat','=','AJR')
+  ->selectRaw('count(id) as nombre_ajr, specialite')
+  ->groupBy('specialite')
+  ->get();
+  $i=0;
+   $nombre_ajournes_par_spec = array("L3E" => "","L3GM" => "","L3CM" => "") ;
+   foreach ($ajournes as $ajourne) {
+   
+   if($ajourne->specialite == "A454"){$nombre_ajournes_par_spec["L3E"] = $ajourne->nombre_ajr;}
+   if($ajourne->specialite == "A459"){$nombre_ajournes_par_spec["L3GM"] = $ajourne->nombre_ajr;}
+   if($ajourne->specialite == "4553"){$nombre_ajournes_par_spec["L3CM"] = $ajourne->nombre_ajr;}
+   }
+
+   return $nombre_ajournes_par_spec;
+
+}
+//--------------------------------
+ public function calcul_total_orient_X(){
+  $ajournes = DB::table('gm')
+  ->selectRaw('count(id) as total_orient')
+  ->get();
+  foreach ($ajournes as $ajourne) {
+    $x = $ajourne->total_orient;
+  }
+  
+  return $x;
+ }
+ //--------------------------------
+ public function calcul_arrondi($nombre){
+  $partie_entiere= floor($nombre);
+  $diff = $nombre - $partie_entiere;
+  if($diff > 0.5){
+    $resultat = $partie_entiere +1;
+  }else{
+    $resultat = $partie_entiere;
+  }
+  return $resultat;
+ }
+ //--------------------------------
+  public function calcul_nbr_places_disp_pr_chaque_specialite(){
+/*Zi = ( (X+Total des ajournés L3)/3  ) - Nombre des ajournés par spécialité*/
+   $places_disp_par_spec = array("L3E" => "","L3GM" => "","L3CM" => "") ;
+   $x= self::calcul_total_orient_X();
+   $nombre_ajournes_par_spec = self::calcul_ajr_par_specialiteL3();
+   
+   $total_ajournes = intval($nombre_ajournes_par_spec["L3E"])+intval($nombre_ajournes_par_spec["L3GM"])+intval($nombre_ajournes_par_spec["L3CM"]);
+   $places_disp_par_spec["L3E"] = self::calcul_arrondi((($x+$total_ajournes)/3) - intval($nombre_ajournes_par_spec["L3E"]));
+
+    $places_disp_par_spec["L3GM"] = self::calcul_arrondi((($x+$total_ajournes)/3) - intval($nombre_ajournes_par_spec["L3GM"])); 
+
+     $places_disp_par_spec["L3CM"] = self::calcul_arrondi((($x+$total_ajournes)/3) - intval($nombre_ajournes_par_spec["L3CM"])); 
+   return $places_disp_par_spec;
+  }
+
+
+  //-------------------------------------
+   public function calcul_taux_reussite(){
+/*taux de réussite = (Nombre d’étudiants à orienter (admis) par section/Le nombre total X)*100*/
+   $sections = DB::table('gm')
+  ->selectRaw('count(id) as nbr_orient_par_section , section')
+  ->groupBy('section')
+  ->get();
+
+   $x= self::calcul_total_orient_X();
+
+  $taux_reussite  = array('A' => "" ,'B' => "",'C' => "",'D' => "",'E' => "");
+  foreach ($sections as $section) {
+    if($section->section == 'A'){$taux_reussite["A"] = ($section->nbr_orient_par_section/$x);}
+    if($section->section == 'B'){$taux_reussite["B"] = ($section->nbr_orient_par_section/$x);}
+    if($section->section == 'C'){$taux_reussite["C"] = ($section->nbr_orient_par_section/$x);}
+    if($section->section == 'D'){$taux_reussite["D"] = ($section->nbr_orient_par_section/$x);}
+    if($section->section == 'E'){$taux_reussite["E"] = ($section->nbr_orient_par_section/$x);}
+    }
+
+    return $taux_reussite;
+
+   }
  //----------------------------------------------------------------------------------
     public function pretraitement_traitement(){
     
@@ -80,11 +161,11 @@ class GestionMecaniqueController extends Controller
         // self::supp_doublants_l2l3();
         // self::calcul_mc();
     //-----------------------------------Traitement---------------------------
+      //$places_disp_par_spec=self::calcul_nbr_places_disp_pr_chaque_specialite();
+    // $taux_reussite = self ::calcul_taux_reussite();
+    
 
-       
-
-
-      return back();
+     // return back();
         }
 
  //----------------------------------------------------------------------------------
