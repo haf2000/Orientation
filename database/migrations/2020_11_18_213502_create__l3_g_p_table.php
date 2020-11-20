@@ -16,10 +16,10 @@ class CreateL3GPTable extends Migration
         Schema::create('L3GP', function (Blueprint $table) {
             $table->id();
             $table->string('matricule')->unique();
-           $table->string('nom');
-           $table->string('prenom');
+          $table->string('nom_prenom');
            $table->char('section',1)->nullable();
            $table->string('resultat');
+            $table->string('specialite')->nullable();
             $table->timestamps();
         });
     }

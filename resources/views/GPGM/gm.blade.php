@@ -6,26 +6,41 @@
 <div class="card card-white">
                 
                 <div class="card-body">
-                    <p class="text-dark text-center mb-2" style="text-align: left;"><strong>Importer la fiche de voeux</strong></p>
+                    <p class="text-dark text-center mb-2" style="text-align: left;"><strong>Entrer la fiche de voeux et les PVs L3 de cette année</strong></p>
                      
-                    <form action="{{ route('home') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('importFVGM') }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                    <p class="text-dark mb-2" style="text-align: left;"><strong>Fiche de voeux : </strong></p>
+                <input type="file" name="file2" class="form-control">
+
+                <br>
+                <button type="submit"  class="col-lg-4 btn btn-primary btn-lg btn-block mb-3 text-center" style="background:  rgba(185,147,214,1);font-weight: normal;">Importer la fiche de voeux</button>
+                
+                   </form>
+                 
+                  <hr style="background-color: rgba(0,0,0,0.6);">
+
+                  <form action="{{ route('importL3GM') }}" method="POST" enctype="multipart/form-data">
+                {{ csrf_field() }}
+
+                   <p class="text-dark mb-2" style="text-align: left;"><strong>PV L3GM :</strong></p>
                 <input type="file" name="file1" class="form-control">
 
                 <br>
-                <button type="submit" class="btn btn-success">Importer</button>
+                <button type="submit"  class="col-lg-4 btn btn-primary btn-lg btn-block mb-3 text-center" style="background:  rgba(185,147,214,1);font-weight: normal;" >Importer le PV L3GM</button>
                 
                    </form>
-
                 </div>
                
             </div>
 
 </div>
-<hr style="background-color: rgba(255,255,255,0.4);">
 
+
+
+
+<hr style="background-color: rgba(255,255,255,0.4);">
  <!---------------------------------------------------------------------------->
 
 <div class="row justify-content-center text-center">
@@ -70,25 +85,19 @@
             <div class="card card-white">
                 
                 <div class="card-body">
-                    <p class="text-dark text-center mb-2"><strong>Importer les fichiers excel nécessaires</strong></p>
+                    <p class="text-dark text-center mb-2"><strong>Entrer le fichiers excel du PV L2</strong></p>
                      
-                  
                 
-
                 <p class="text-dark mb-2" style="text-align: left;"><strong>PV de délibération L2 de cette année : </strong></p>
                 <input type="file" name="file" class="form-control"><br>
-                <!-- <p class="text-dark mb-2" style="text-align: left;"><strong>PV de délibération L3 de cette année : </strong></p>
-                <input type="file" name="file2" class="form-control"> -->
                 <br>
-                <button class="btn btn-success">Importer les 2 fichiers</button>
+                <button class="btn btn-success">Importer le PV L2</button>
                 
-                  
-
                 </div>
                 <div class="card-footer">
                    
   <a href="#" rel="modal:close" style="font-size: 15px;">Fermer</a> 
-                    <!-- <button type="submit" class="btn btn-primary btn-lg btn-block mb-3 text-center" style="background:  rgba(185,147,214,1);font-weight: normal;">{{ __('Effectuer le traitement') }}</button> -->    
+                   
 
                  </div>
             </div>
@@ -110,7 +119,7 @@
   <div class="col-lg-4"></div>
   <div class="col-lg-4">
     
-    <button type="submit" class="btn btn-primary btn-lg btn-block mb-3 text-center" style="background:  rgba(185,147,214,1);font-weight: normal;">{{ __('Effectuer le traitement') }}</button>
+    <a type="submit" class="btn btn-success" href="{{ route('traitement') }}">{{ __('Effectuer le traitement') }}</a>
   </div>
   <div class="col-lg-4"></div>
 </div>

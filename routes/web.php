@@ -30,6 +30,10 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 //Route::post('import', 'ImportL2GMController@import')->name('import');
 //Route::post('import2', 'ImportL2GMController@test')->name('import2');
 Route::post('import', 'ImportL2GMController@import')->name('import');
+Route::post('importL3GM', 'ImportL3GMController@import')->name('importL3GM');
+Route::post('importFVGM', 'ImportFVGMController@import')->name('importFVGM');
+
+Route::get('/traitement', 'GestionMecaniqueController@pretraitement_traitement')->name('traitement');
 
 
 Route::group(['middleware' => 'auth'], function () {

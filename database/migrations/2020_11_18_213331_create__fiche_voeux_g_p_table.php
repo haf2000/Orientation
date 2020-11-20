@@ -18,12 +18,13 @@ class CreateFicheVoeuxGPTable extends Migration
              $table->string('matricule')->unique();
            $table->string('nom');
            $table->string('prenom');
+           $table->integer('anet');
            $table->string('origine');
            $table->char('section',1);
            $table->string('choix1');
            $table->string('choix2');
            $table->string('choix3');
-           $table->string('nationalite');
+           $table->string('nationalite')->nullable();
             $table->timestamps();
         });
     }
