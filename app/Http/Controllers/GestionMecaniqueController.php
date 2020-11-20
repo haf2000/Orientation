@@ -54,17 +54,15 @@ class GestionMecaniqueController extends Controller
      ['matricule', '=', $fiche->matricule],
     ['nom_prenom', '=', $NP]
      ])->update(['r' => $r,'choix1' => $fiche->choix1,'choix2' => $fiche->choix2 ]);
-
-           	}
-
+         }
             }
 
-
+         // calcul mc = MG * (1-0.04*(R+session/4))
+        DB::statement("UPDATE `gm` SET `mc`= `moy_an`*(1-0.04*(`r`+(`session`/4)))");
           }
 
 
-           // calcul mc = MG * (1-0.04*(R+session/4))
-        	
+           
          
     
 
