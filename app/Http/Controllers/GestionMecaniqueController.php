@@ -153,6 +153,45 @@ public function calcul_ajr_par_specialiteL3()
     return $taux_reussite;
 
    }
+
+
+    //-------------------------------------
+   public function calcul_places_dispo_section_specialite(){
+/*calcul de places disponibles pour chaque section pour les 3 spécialités = Taux de réussite * (Z-Ajournés)*/
+     // Les lignes = les sections / les colonnes sont les spécialités
+    $matrice = array('A','B','C','D','E');
+    $matrice['A'] = array('L3E','L3GM','L3CM');
+    $matrice['B'] = array('L3E','L3GM','L3CM');
+    $matrice['C'] = array('L3E','L3GM','L3CM');
+    $matrice['D'] = array('L3E','L3GM','L3CM');
+    $matrice['E'] = array('L3E','L3GM','L3CM');
+
+     $taux_reussite = self::calcul_taux_reussite();
+     $places_disp_par_spec = self::calcul_nbr_places_disp_pr_chaque_specialite();
+       
+      // section A
+     $matrice['A']['L3E'] =  $taux_reussite['A'] * $places_disp_par_spec['L3E'];
+     $matrice['A']['L3GM'] =  $taux_reussite['A'] * $places_disp_par_spec['L3GM'];
+     $matrice['A']['L3CM'] =  $taux_reussite['A'] * $places_disp_par_spec['L3CM'];
+      // section B
+     $matrice['B']['L3E'] =  $taux_reussite['B'] * $places_disp_par_spec['L3E'];
+     $matrice['B']['L3GM'] = $taux_reussite['B'] * $places_disp_par_spec['L3GM'];
+     $matrice['B']['L3CM'] =  $taux_reussite['B'] * $places_disp_par_spec['L3CM'];
+      //section C
+     $matrice['C']['L3E'] =  $taux_reussite['C'] * $places_disp_par_spec['L3E'];
+     $matrice['C']['L3GM'] = $taux_reussite['C'] * $places_disp_par_spec['L3GM'];
+     $matrice['C']['L3CM'] = $taux_reussite['C'] * $places_disp_par_spec['L3CM'];
+      // section D
+     $matrice['D']['L3E'] =  $taux_reussite['D'] * $places_disp_par_spec['L3E'];
+     $matrice['D']['L3GM'] = $taux_reussite['D'] * $places_disp_par_spec['L3GM'];
+     $matrice['D']['L3CM'] = $taux_reussite['D'] * $places_disp_par_spec['L3CM'];
+      // section E
+     $matrice['E']['L3E'] =  $taux_reussite['E'] * $places_disp_par_spec['L3E'];
+     $matrice['E']['L3GM'] =  $taux_reussite['E'] * $places_disp_par_spec['L3GM'];
+     $matrice['E']['L3CM'] = $taux_reussite['D'] * $places_disp_par_spec['L3CM'];
+  
+     return  $matrice;
+   }
  //----------------------------------------------------------------------------------
     public function pretraitement_traitement(){
     
@@ -163,8 +202,34 @@ public function calcul_ajr_par_specialiteL3()
     //-----------------------------------Traitement---------------------------
       //$places_disp_par_spec=self::calcul_nbr_places_disp_pr_chaque_specialite();
     // $taux_reussite = self ::calcul_taux_reussite();
-    
+     $matrice =  self::calcul_places_dispo_section_specialite(); 
+ // section A
+     echo "section A : ".$matrice['A']['L3E']."<br>";
+     echo "section A : ".$matrice['A']['L3GM']."<br>";
+    echo "section A : ". $matrice['A']['L3CM']."<br>";
+      echo "************************************<br>";
+      // section B
+     echo "section B : ".$matrice['B']['L3E'] ."<br>";
+     echo "section B : ".$matrice['B']['L3GM']  ."<br>";
+     echo "section B : ".$matrice['B']['L3CM']   ."<br>";
+    echo "************************************<br>";
 
+      //section C
+     echo "section C : ".$matrice['C']['L3E']   ."<br>";
+     echo "section C : ".$matrice['C']['L3GM']  ."<br>";
+     echo "section C : ".$matrice['C']['L3CM']  ."<br>";
+           echo "************************************<br>";
+
+      // section D
+     echo "section D : ".$matrice['D']['L3E']   ."<br>";
+     echo "section D : ".$matrice['D']['L3GM']  ."<br>";
+     echo "section D : ".$matrice['D']['L3CM'] ."<br>";
+           echo "************************************<br>";
+
+      // section E
+     echo "section E : ".$matrice['E']['L3E'] ."<br>";
+     echo "section E : ".$matrice['E']['L3GM']."<br>";
+     echo "section E : ".$matrice['E']['L3CM']."<br>";
      // return back();
         }
 
