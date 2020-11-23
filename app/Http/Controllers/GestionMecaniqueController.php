@@ -760,8 +760,14 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
            
            }else{
            // fiche de voeux non remplie : fichevoeux_remp = 0
-            if(empty($file_attente)){ $file_attente[0] = $etudiant;}
-            else{$file_attente[count($file_attente)-1] = $etudiant;}
+            $nombre_elements = count($file_attente); 
+             if ($nombre_elements == 0) {
+                $file_attente[0] = $etudiant;
+             }else{
+              $file_attente[$nombre_elements-1] = $etudiant;
+             }
+                    
+          
             
            }
              // continuer dans le foreach 
@@ -772,6 +778,37 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
        
 
            }
+        
+        // traitement des elements  de la file d'attente 
+            
+        
+           for ($j=0; $j < count($file_attente) ; $j++) { 
+             $orientation_fa="";
+             if( $places_disp_L3E <> 0){
+               $orientation_fa = "A454";
+               $places_disp_L3E=$places_disp_L3E-1;
+             }else{
+               if( $places_disp_L3CM  <> 0){
+                $orientation_fa = "4553";
+                $places_disp_L3CM=$places_disp_L3CM-1;
+               }else{
+                if( $places_disp_L3GM  <> 0){
+                    $orientation_fa = "A459";
+                    $places_disp_L3GM=$places_disp_L3GM-1;
+                }
+               }
+             }
+            // continuer dans la boucle for de la file d'attente
+                
+                DB::table('gm')-> where([
+     ['matricule', '=', $file_attente[$j]->matricule],
+    ['nom_prenom', '=', $file_attente[$j]->nom_prenom]
+     ])->update(['orientation' => $orientation_fa]); 
+           
+           }
+           
+
+
       }
 
        
@@ -799,9 +836,7 @@ public function recup_nbr_orient_par_sect($section){
         // self::calcul_mc();
     //-----------------------------------Traitement---------------------------
     self::orientation();
-   // $mat = self::calcul_places_dispo_section_specialite();
-    echo "<br>orientation done";
-     // return back();
+    return back();
         }
 
  //----------------------------------------------------------------------------------

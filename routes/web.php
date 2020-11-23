@@ -42,6 +42,8 @@ Route::get('/traitement', 'GestionMecaniqueController@pretraitement_traitement')
 Route::get('/refairetraitement', 'GestionMecaniqueController@refaire_traitement')->name('refairetraitement');
 
 Route::get('/traitementGP', 'GestionProcedesController@pretraitement_traitement')->name('traitementGP');
+Route::get('/refairetraitementGP', 'GestionProcedesController@refaire_traitement')->name('refairetraitementGP');
+
 
 Route::group(['middleware' => 'auth'], function () {
 		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'PageController@icons']);
