@@ -35,14 +35,15 @@ class GestionProcedesController extends Controller
         // calcul R : années de retard
           $annee_cours = date("Y"); 
           $matricule_errone = '0';
-       
-         $fiches = DB::table('fichevoeuxgp')-> select('matricule','nom','prenom','choix1','choix2','choix3','nationalite')->get();
+           $annee_cours = "2019";
+         $fiches = DB::table('fichevoeuxgp')-> select('matricule','nom','prenom','choix1','choix2','nationalite')->get();
 
           foreach ($fiches as $fiche) {
+           $matric = substr($fiche->matricule,1,12);
           	$NP = $fiche->nom." ".$fiche->prenom;
-            $num_matricule =substr($fiche->matricule,0,2);
+            $num_matricule =substr($fiche->matricule,1,2);
             if($num_matricule == "20"){
-               $annee_matricule =substr($fiche->matricule,0,4);
+               $annee_matricule =substr($fiche->matricule,1,4);
            
             }else{ $annee_matricule = "20".$num_matricule;}
            
@@ -57,15 +58,17 @@ class GestionProcedesController extends Controller
                   }
               
       DB::table('gp')-> where([
-     ['matricule', '=', $fiche->matricule],
+     ['matricule', '=', $matric],
     ['nom_prenom', '=', $NP]
      ])->update(['r' => $r]);  
 
               }
+              if( ($fiche->choix1 <> null) and ($fiche->choix2 <> null))
+               {$fichevoeux_remp_null='1';}else{$fichevoeux_remp_null='0';}
                  DB::table('gp')-> where([
-     ['matricule', '=', $fiche->matricule],
+     ['matricule', '=', $matric],
     ['nom_prenom', '=', $NP]
-     ])->update(['choix1' => $fiche->choix1,'choix2' => $fiche->choix2,'fichevoeux_remp' => '1']);
+     ])->update(['choix1' => $fiche->choix1,'choix2' => $fiche->choix2,'fichevoeux_remp' => $fichevoeux_remp_null]);
                  }
                      // calcul mc = MG * (1-0.04*(R+session/4))
         DB::statement("UPDATE `gp` SET `mc`= `moy_an`*(1-0.04*(`r`+(`session`/4))) ");
@@ -444,7 +447,7 @@ public function calcul_total_orient_X(){
              if ($nombre_elements == 0) {
                 $file_attente[0] = $etudiant;
              }else{
-              $file_attente[$nombre_elements-1] = $etudiant;
+              $file_attente[$nombre_elements] = $etudiant;
              }
                     
           
@@ -505,7 +508,10 @@ public function calcul_total_orient_X(){
  //---------------------------------------------------------------------------
 
     public function pretraitement_traitement(){
- self::orientation();
+       self::supp_ajr_l2();    
+   self::supp_doublants_l2l3();
+   self::calcul_mc();
+     self::orientation();
        return back();
         }
 

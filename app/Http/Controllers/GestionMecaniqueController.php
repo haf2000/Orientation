@@ -72,7 +72,7 @@ class GestionMecaniqueController extends Controller
      ])->update(['r' => $r]);  
 
               }
-               echo "etudiant de matricule : ".$fiche->matricule." | année en cours : ".$annee_cours." | année matricule : ".$annee_matricule." | r : ".$r." | choix 1 / choix2 / choix3 :  ". $fiche->choix1."/ ".$fiche->choix2."/ ".$fiche->choix3."<br>";
+               // echo "etudiant de matricule : ".$fiche->matricule." | année en cours : ".$annee_cours." | année matricule : ".$annee_matricule." | r : ".$r." | choix 1 / choix2 / choix3 :  ". $fiche->choix1."/ ".$fiche->choix2."/ ".$fiche->choix3."<br>";
               if( ($fiche->choix1 <> null) and ($fiche->choix2 <> null) and ($fiche->choix3 <> null) ){$fichevoeux_remp_null='1';}else{$fichevoeux_remp_null='0';}
                  DB::table('gm')-> where([
      ['matricule', '=', $matric],
@@ -116,17 +116,7 @@ public function calcul_ajr_par_specialiteL3()
   return $x;
  }
  //--------------------------------
- // public function calcul_arrondi($nombre){
- //  $partie_entiere= floor($nombre);
- //  $diff = $nombre - $partie_entiere;
- //  if($diff > 0.5){
- //    $resultat = $partie_entiere +1;
- //  }else{
- //    $resultat = $partie_entiere;
- //  }
- //  return $resultat;
- // }
- //--------------------------------
+ 
   public function calcul_nbr_places_disp_pr_chaque_specialite(){
 /*Zi = ( (X+Total des ajournés L3)/3  ) - Nombre des ajournés par spécialité*/
    $places_disp_par_spec = array("L3E" => 0,"L3GM" => 0,"L3CM" => 0) ;
@@ -178,11 +168,7 @@ public function calcul_ajr_par_specialiteL3()
      }
     }
 
-     // echo "<br> valeur float : ". $afficher_l3e." | valeur entiere : ".$places_disp_par_spec['L3E'];
-     // echo "<br> valeur float : ". $afficher_l3gm." | valeur entiere : ".$places_disp_par_spec['L3GM'];
-     // echo "<br> valeur float : ". $afficher_l3cm." | valeur entiere : ".$places_disp_par_spec['L3CM'];     
-     // echo "<br> total : ". $total." | x : ".$x;     
-
+    
    return $places_disp_par_spec;
   }
 
