@@ -97,7 +97,7 @@
         </div>
     </div>
     <div class="row">
-        
+
 
         <div class="col-lg-12 col-md-12">
             <div class="card ">
@@ -125,8 +125,7 @@
                                     Génie_Mécanique_Section_H
                                     </td>
                                     <td class="text-center">
-                                      <i class="tim-icons icon-cloud-download-93"></i>
-                                    </td>
+ <a href="{{ route('exportGMH') }}"><i class="tim-icons icon-cloud-download-93"></i></a>                                    </td>
                                 </tr>
                                 <tr>
                                     
@@ -134,8 +133,7 @@
                                     Génie_Mécanique_Section_I
                                     </td>
                                     <td class="text-center">
-                                      <i class="tim-icons icon-cloud-download-93"></i>
-                                    </td>
+<a href="{{ route('exportGMI') }}"><i class="tim-icons icon-cloud-download-93"></i></a>                                    </td>
                                 </tr>
                                 <tr>
                                     
@@ -143,8 +141,7 @@
                                     Génie_Mécanique_Section_J
                                     </td>
                                     <td class="text-center">
-                                      <i class="tim-icons icon-cloud-download-93"></i>
-                                    </td>
+<a href="{{ route('exportGMJ') }}"><i class="tim-icons icon-cloud-download-93"></i></a>                                    </td>
                                 </tr>
                                 <tr>
                                     
@@ -152,8 +149,8 @@
                                     Génie_Mécanique_Section_K
                                     </td>
                                     <td class="text-center">
-                                      <i class="tim-icons icon-cloud-download-93"></i>
-                                    </td>
+<a href="{{ route('exportGMK') }}"><i class="tim-icons icon-cloud-download-93"></i></a>                                    
+</td>
                                 </tr>
                                 <tr>
                                     
@@ -161,8 +158,7 @@
                                     Génie_Mécanique_Section_L
                                     </td>
                                     <td class="text-center">
-                                      <i class="tim-icons icon-cloud-download-93"></i>
-                                    </td>
+<a href="{{ route('exportGML') }}"><i class="tim-icons icon-cloud-download-93"></i></a>                                    </td>
 
                                 </tr>
 
@@ -171,8 +167,7 @@
                                     Génie_Mécanique_Spécialité_Eerg
                                     </td>
                                     <td class="text-center">
-                                      <i class="tim-icons icon-cloud-download-93"></i>
-                                    </td> 
+<a href="{{ route('exportEnerg') }}"><i class="tim-icons icon-cloud-download-93"></i></a>                                    </td> 
 
                                 </tr>
                                 <tr>
@@ -180,8 +175,7 @@
                                     Génie_Mécanique_Spécialité_GM
                                     </td>
                                     <td class="text-center">
-                                      <i class="tim-icons icon-cloud-download-93"></i>
-                                    </td> 
+<a href="{{ route('exportGM') }}"><i class="tim-icons icon-cloud-download-93"></i></a>                                    </td> 
 
                                 </tr>
                                 <tr>
@@ -189,8 +183,7 @@
                                     Génie_Mécanique_Spécialité_CM
                                     </td>
                                     <td class="text-center">
-                                      <i class="tim-icons icon-cloud-download-93"></i>
-                                    </td> 
+<a href="{{ route('exportCM') }}"><i class="tim-icons icon-cloud-download-93"></i></a>                                    </td> 
 
                                 </tr>
 
@@ -199,7 +192,7 @@
                                     Génie_Mécanique_Complet
                                     </td>
                                     <td class="text-center">
-                                      <i class="tim-icons icon-cloud-download-93"></i>
+                                    <a href="{{ route('exportGMTotal') }}"><i class="tim-icons icon-cloud-download-93"></i></a>   
                                     </td> 
 
                                 </tr>
@@ -234,8 +227,7 @@
                                     Génie_Procédés_Section_C
                                     </td>
                                     <td class="text-center">
-                                      <i class="tim-icons icon-cloud-download-93"></i>
-                                    </td>
+<a href="{{ route('exportGPC') }}"><i class="tim-icons icon-cloud-download-93"></i></a>                                    </td>
                                 </tr>
                                 <tr>
                                     
@@ -243,8 +235,7 @@
                                     Génie_Procédés_Section_D
                                     </td>
                                     <td class="text-center">
-                                      <i class="tim-icons icon-cloud-download-93"></i>
-                                    </td>
+<a href="{{ route('exportGPD') }}"><i class="tim-icons icon-cloud-download-93"></i></a>                                    </td>
                                 </tr>
                                 <tr>
                                     
@@ -252,8 +243,7 @@
                                     Génie_Procédés_Section_E
                                     </td>
                                     <td class="text-center">
-                                      <i class="tim-icons icon-cloud-download-93"></i>
-                                    </td>
+<a href="{{ route('exportGPE') }}"><i class="tim-icons icon-cloud-download-93"></i></a>                                    </td>
                                 </tr>
                                 <tr>
                                     
@@ -261,8 +251,7 @@
                                     Génie_Procédés_Section_F
                                     </td>
                                     <td class="text-center">
-                                      <i class="tim-icons icon-cloud-download-93"></i>
-                                    </td>
+<a href="{{ route('exportGPF') }}"><i class="tim-icons icon-cloud-download-93"></i></a>                                    </td>
                                 </tr>
                                 <tr>
                                     
@@ -270,8 +259,7 @@
                                     Génie_Procédés_Section_G
                                     </td>
                                     <td class="text-center">
-                                      <i class="tim-icons icon-cloud-download-93"></i>
-                                    </td>
+<a href="{{ route('exportGPG') }}"><i class="tim-icons icon-cloud-download-93"></i></a>                                    </td>
 
                                 </tr>
 
@@ -280,8 +268,7 @@
                                     Génie_Procédés_Spécialité_GP
                                     </td>
                                     <td class="text-center">
-                                      <i class="tim-icons icon-cloud-download-93"></i>
-                                    </td> 
+<a href="{{ route('exportGP') }}"><i class="tim-icons icon-cloud-download-93"></i></a>                                    </td> 
 
                                 </tr>
                                 <tr>
@@ -289,8 +276,7 @@
                                     Génie_Procédés_Spécialité_RP
                                     </td>
                                     <td class="text-center">
-                                      <i class="tim-icons icon-cloud-download-93"></i>
-                                    </td> 
+<a href="{{ route('exportRP') }}"><i class="tim-icons icon-cloud-download-93"></i></a>                                    </td> 
 
                                 </tr>
                                 
@@ -300,7 +286,7 @@
                                     Génie_Procédés_Complet
                                     </td>
                                     <td class="text-center">
-                                      <i class="tim-icons icon-cloud-download-93"></i>
+                                      <a href="{{ route('exportGPTotal') }}"><i class="tim-icons icon-cloud-download-93"></i></a>   
                                     </td> 
 
                                 </tr>

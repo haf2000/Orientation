@@ -44,6 +44,28 @@ Route::get('/refairetraitement', 'GestionMecaniqueController@refaire_traitement'
 Route::get('/traitementGP', 'GestionProcedesController@pretraitement_traitement')->name('traitementGP');
 Route::get('/refairetraitementGP', 'GestionProcedesController@refaire_traitement')->name('refairetraitementGP');
 
+Route::get('/exportGMTotal','GestionMecaniqueController@export_GMtotal')->name('exportGMTotal');
+Route::get('/exportGPTotal','GestionProcedesController@export_GPtotal')->name('exportGPTotal');
+
+
+Route::get('/exportGMH','GestionMecaniqueController@export_section_H')->name('exportGMH');
+Route::get('/exportGMI','GestionMecaniqueController@export_section_I')->name('exportGMI');
+Route::get('/exportGMJ','GestionMecaniqueController@export_section_J')->name('exportGMJ');
+Route::get('/exportGMK','GestionMecaniqueController@export_section_K')->name('exportGMK');
+Route::get('/exportGML','GestionMecaniqueController@export_section_L')->name('exportGML');
+
+Route::get('/exportGPC','GestionProcedesController@export_section_C')->name('exportGPC');
+Route::get('/exportGPD','GestionProcedesController@export_section_D')->name('exportGPD');
+Route::get('/exportGPE','GestionProcedesController@export_section_E')->name('exportGPE');
+Route::get('/exportGPF','GestionProcedesController@export_section_F')->name('exportGPF');
+Route::get('/exportGPG','GestionProcedesController@export_section_G')->name('exportGPG');
+
+Route::get('/exportEnerg','GestionMecaniqueController@export_spec_L3E')->name('exportEnerg');
+Route::get('/exportGM','GestionMecaniqueController@export_spec_L3GM')->name('exportGM');
+Route::get('/exportCM','GestionMecaniqueController@export_spec_L3CM')->name('exportCM');
+
+Route::get('/exportGP','GestionProcedesController@export_spec_L3GP')->name('exportGP');
+Route::get('/exportRP','GestionProcedesController@export_spec_L3RP')->name('exportRP');
 
 Route::group(['middleware' => 'auth'], function () {
 		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'PageController@icons']);

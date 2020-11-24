@@ -6,6 +6,15 @@ use Illuminate\Http\Request;
 use App\GP;
 use App\L3GP;
 use DB;
+use App\Exports\GPTotalExport;
+use App\Exports\SectionCExport; 
+use App\Exports\SectionDExport; 
+use App\Exports\SectionEExport; 
+use App\Exports\SectionFExport; 
+use App\Exports\SectionGExport; 
+use App\Exports\SpecialiteGPExport;
+use App\Exports\SpecialiteRPExport;
+use Maatwebsite\Excel\Facades\Excel;
 class GestionProcedesController extends Controller
 {
    
@@ -392,13 +401,7 @@ public function calcul_total_orient_X(){
                else{
                 // aucune place disponible - traitement choix2
                 if ($etudiant->choix2 <> NULL){
-                        if($etudiant->choix2 == "57"){ // condition1 choix2
-                          if($places_disp_L3GP > 0){
-                         $places_disp_L3GP=$places_disp_L3GP-1;
-                          $orientation = "57";
-                          }
-                        }
-
+                       
                         if($etudiant->choix2 == "B4571"){ // condition2 choix2
                            if($places_disp_L3RP > 0){
                          $places_disp_L3RP=$places_disp_L3RP-1;
@@ -426,13 +429,7 @@ public function calcul_total_orient_X(){
                           }
                         }
 
-                        if($etudiant->choix2 == "B4571"){ // condition2 choix2
-                           if($places_disp_L3RP > 0){
-                         $places_disp_L3RP=$places_disp_L3RP-1;
-                          $orientation = "B4571";
-                          }
-                        }
-                 
+                                        
                  }
 
                } 
@@ -509,9 +506,9 @@ public function calcul_total_orient_X(){
 
     public function pretraitement_traitement(){
        self::supp_ajr_l2();    
-   self::supp_doublants_l2l3();
-   self::calcul_mc();
-     self::orientation();
+       self::supp_doublants_l2l3();
+       self::calcul_mc();
+       self::orientation();
        return back();
         }
 
@@ -523,5 +520,55 @@ public function calcul_total_orient_X(){
              return back();
 
         }
+
+ //---------------------------------------------------------------------------
+
+  public function export_GPtotal() 
+    {
+        return Excel::download(new GPTotalExport, 'Total GP.xlsx');
+        
+    }
+//------------------------------------------------------------------------------
+        public function export_section_C() 
+    {
+        return Excel::download(new SectionCExport, 'GP section C.xlsx');
+        
+    }
+ //----------------------------------------------------------------------------------
+    public function export_section_D() 
+    {
+        return Excel::download(new SectionDExport, 'GP section D.xlsx');
+        
+    }
+ //----------------------------------------------------------------------------------
+    public function export_section_E() 
+    {
+        return Excel::download(new SectionEExport, 'GP section E.xlsx');
+        
+    }
+ //----------------------------------------------------------------------------------
+    public function export_section_F() 
+    {
+        return Excel::download(new SectionFExport, 'GP section F.xlsx');
+        
+    }
+    //----------------------------------------------------------------------------------
+    public function export_section_G() 
+    {
+        return Excel::download(new SectionGExport, 'GP section G.xlsx');
+        
+    }
+    //---------------------------------------------------------------------------------- 
+    public function export_spec_L3GP() 
+    {
+        return Excel::download(new SpecialiteGPExport, 'GP spécialité GP.xlsx');
+        
+    }
+    //----------------------------------------------------------------------------------
+    public function export_spec_L3RP() 
+    {
+        return Excel::download(new SpecialiteRPExport, 'GP spécialité RP.xlsx');
+        
+    }
 
 }

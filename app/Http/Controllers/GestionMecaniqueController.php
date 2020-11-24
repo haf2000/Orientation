@@ -6,6 +6,16 @@ use Illuminate\Http\Request;
 use App\GM;
 use App\L3GM;
 use DB;
+use App\Exports\GMTotalExport; 
+use App\Exports\SectionHExport; 
+use App\Exports\SectionIExport; 
+use App\Exports\SectionJExport; 
+use App\Exports\SectionKExport; 
+use App\Exports\SectionLExport; 
+use App\Exports\SpecialiteEnergExport;
+use App\Exports\SpecialiteGMExport;
+use App\Exports\SpecialiteCMExport;
+use Maatwebsite\Excel\Facades\Excel;
 class GestionMecaniqueController extends Controller
 {
 
@@ -405,6 +415,7 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
  //----------------------------------------------------------------------------------
       public function orientation()
       {
+        set_time_limit(1800);
     // intialiser les sections
       $sections = array();
       $sections[0] = 'A';
@@ -436,13 +447,6 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
       $places_disp_L3GM = $places_dispo_par_spec['L3GM'];
       $places_disp_L3CM = $places_dispo_par_spec['L3CM'];
 
-
-      echo "<br>nombre de personnes à orienter :".self::calcul_total_orient_X();     
-      echo "<br>places dispos pour la section : ".$section;
-      echo "<br>L3E : ".$places_disp_L3E;
-      echo "<br>L3GM : ".$places_disp_L3GM;
-      echo "<br>L3CM : ".$places_disp_L3CM;
-
       // faire le classement selon la moyenne corrigée pour chaque section
           $etudiants_section_classes_par_mc = DB::table('gm')->
               where('section','=',$section)->
@@ -463,36 +467,7 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
                else{
                 // aucune place disponible - traitement choix2
                 if ($etudiant->choix2 <> NULL){
-                        if($etudiant->choix2 == "A454"){ // condition1 choix2
-                          if($places_disp_L3E > 0){
-                         $places_disp_L3E=$places_disp_L3E-1;
-                          $orientation = "A454";
-                          }else{
-                          // aucune place disponible - traitement choix3
-                            if ($etudiant->choix3 <> NULL){
-                             if($etudiant->choix3 == "A454"){
-                              if($places_disp_L3E > 0){
-                         $places_disp_L3E=$places_disp_L3E-1;
-                          $orientation = "A454";
-                          }else{echo "Tweswiss";}
-                             }
-                             if($etudiant->choix3 == "A459"){
-                              if($places_disp_L3GM > 0){
-                              $places_disp_L3GM=$places_disp_L3GM-1;
-                              $orientation = "A459";
-                              }else{echo "Tweswiss";}}
-                             if($etudiant->choix3 == "4553"){
-                              if($places_disp_L3CM > 0){
-                              $places_disp_L3CM=$places_disp_L3CM-1;
-                              $orientation = "4553";
-                              }else{echo "Tweswiss";}
-                             }
-                            }
-                          }
-                        }
-
-
-
+                       
                         if($etudiant->choix2 == "A459"){ // condition2 choix2
                            if($places_disp_L3GM > 0){
                          $places_disp_L3GM=$places_disp_L3GM-1;
@@ -500,22 +475,12 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
                           }else{
                           // aucune place disponible - traitement choix3
                             if ($etudiant->choix3 <> NULL){
-                             if($etudiant->choix3 == "A454"){
-                              if($places_disp_L3E > 0){
-                         $places_disp_L3E=$places_disp_L3E-1;
-                          $orientation = "A454";
-                          }else{echo "Tweswiss";}
-                             }
-                             if($etudiant->choix3 == "A459"){
-                              if($places_disp_L3GM > 0){
-                              $places_disp_L3GM=$places_disp_L3GM-1;
-                              $orientation = "A459";
-                              }else{echo "Tweswiss";}}
-                             if($etudiant->choix3 == "4553"){
+                             
+                              if($etudiant->choix3 == "4553"){
                               if($places_disp_L3CM > 0){
                               $places_disp_L3CM=$places_disp_L3CM-1;
                               $orientation = "4553";
-                              }else{echo "Tweswiss";}
+                              }
                              }
                             }
                           }
@@ -530,23 +495,13 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
                           }else{
                              // aucune place disponible - traitement choix3
                             if ($etudiant->choix3 <> NULL){
-                             if($etudiant->choix3 == "A454"){
-                              if($places_disp_L3E > 0){
-                         $places_disp_L3E=$places_disp_L3E-1;
-                          $orientation = "A454";
-                          }else{echo "Tweswiss";}
-                             }
+                            
                              if($etudiant->choix3 == "A459"){
                               if($places_disp_L3GM > 0){
                               $places_disp_L3GM=$places_disp_L3GM-1;
                               $orientation = "A459";
-                              }else{echo "Tweswiss";}}
-                             if($etudiant->choix3 == "4553"){
-                              if($places_disp_L3CM > 0){
-                              $places_disp_L3CM=$places_disp_L3CM-1;
-                              $orientation = "4553";
-                              }else{echo "Tweswiss";}
-                             }
+                              }}
+                            
                             }
                           }
                         }
@@ -555,6 +510,8 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
                 }
                } 
               }
+
+
               if($etudiant->choix1 == "A459"){ // condition 2 choix 1
                 if($places_disp_L3GM > 0){
                 $places_disp_L3GM=$places_disp_L3GM-1;
@@ -570,60 +527,18 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
                           }else{
                           // aucune place disponible - traitement choix3
                             if ($etudiant->choix3 <> NULL){
-                             if($etudiant->choix3 == "A454"){
-                              if($places_disp_L3E > 0){
-                         $places_disp_L3E=$places_disp_L3E-1;
-                          $orientation = "A454";
-                          }else{echo "Tweswiss";}
-                             }
-                             if($etudiant->choix3 == "A459"){
-                              if($places_disp_L3GM > 0){
-                              $places_disp_L3GM=$places_disp_L3GM-1;
-                              $orientation = "A459";
-                              }else{echo "Tweswiss";}}
+                             
                              if($etudiant->choix3 == "4553"){
                               if($places_disp_L3CM > 0){
                               $places_disp_L3CM=$places_disp_L3CM-1;
                               $orientation = "4553";
-                              }else{echo "Tweswiss";}
+                              }
                              }
                             }
                           }
                         }
 
-                    
-
-
-                        if($etudiant->choix2 == "A459"){ // condition2 choix2
-                           if($places_disp_L3GM > 0){
-                         $places_disp_L3GM=$places_disp_L3GM-1;
-                          $orientation = "A459";
-                          }else{
-                          // aucune place disponible - traitement choix3
-                            if ($etudiant->choix3 <> NULL){
-                             if($etudiant->choix3 == "A454"){
-                              if($places_disp_L3E > 0){
-                         $places_disp_L3E=$places_disp_L3E-1;
-                          $orientation = "A454";
-                          }else{echo "Tweswiss";}
-                             }
-                             if($etudiant->choix3 == "A459"){
-                              if($places_disp_L3GM > 0){
-                              $places_disp_L3GM=$places_disp_L3GM-1;
-                              $orientation = "A459";
-                              }else{echo "Tweswiss";}}
-                             if($etudiant->choix3 == "4553"){
-                              if($places_disp_L3CM > 0){
-                              $places_disp_L3CM=$places_disp_L3CM-1;
-                              $orientation = "4553";
-                              }else{echo "Tweswiss";}
-                             }
-                            }
-                          }
-                        }
-
-
-
+                                           
                         if($etudiant->choix2 == "4553"){ // condition3 choix2
                            if($places_disp_L3CM > 0){
                          $places_disp_L3CM=$places_disp_L3CM-1;
@@ -635,19 +550,9 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
                               if($places_disp_L3E > 0){
                          $places_disp_L3E=$places_disp_L3E-1;
                           $orientation = "A454";
-                          }else{echo "Tweswiss";}
+                          }
                              }
-                             if($etudiant->choix3 == "A459"){
-                              if($places_disp_L3GM > 0){
-                              $places_disp_L3GM=$places_disp_L3GM-1;
-                              $orientation = "A459";
-                              }else{echo "Tweswiss";}}
-                             if($etudiant->choix3 == "4553"){
-                              if($places_disp_L3CM > 0){
-                              $places_disp_L3CM=$places_disp_L3CM-1;
-                              $orientation = "4553";
-                              }else{echo "Tweswiss";}
-                             }
+                             
                             }
                           }
                         }
@@ -656,6 +561,7 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
 
                } 
               }
+
               if($etudiant->choix1 == "4553"){ // condition 3 choix 1
                 if($places_disp_L3CM > 0){
                 $places_disp_L3CM=$places_disp_L3CM-1;
@@ -671,23 +577,13 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
                           }else{
                           // aucune place disponible - traitement choix3
                             if ($etudiant->choix3 <> NULL){
-                             if($etudiant->choix3 == "A454"){
-                              if($places_disp_L3E > 0){
-                         $places_disp_L3E=$places_disp_L3E-1;
-                          $orientation = "A454";
-                          }else{echo "Tweswiss";}
-                             }
+                             
                              if($etudiant->choix3 == "A459"){
                               if($places_disp_L3GM > 0){
                               $places_disp_L3GM=$places_disp_L3GM-1;
                               $orientation = "A459";
-                              }else{echo "Tweswiss";}}
-                             if($etudiant->choix3 == "4553"){
-                              if($places_disp_L3CM > 0){
-                              $places_disp_L3CM=$places_disp_L3CM-1;
-                              $orientation = "4553";
-                              }else{echo "Tweswiss";}
-                             }
+                              }}
+                            
                             }
                           }
                         }
@@ -706,52 +602,14 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
                               if($places_disp_L3E > 0){
                          $places_disp_L3E=$places_disp_L3E-1;
                           $orientation = "A454";
-                          }else{echo "Tweswiss";}
+                          }
                              }
-                             if($etudiant->choix3 == "A459"){
-                              if($places_disp_L3GM > 0){
-                              $places_disp_L3GM=$places_disp_L3GM-1;
-                              $orientation = "A459";
-                              }else{echo "Tweswiss";}}
-                             if($etudiant->choix3 == "4553"){
-                              if($places_disp_L3CM > 0){
-                              $places_disp_L3CM=$places_disp_L3CM-1;
-                              $orientation = "4553";
-                              }else{echo "Tweswiss";}
-                             }
+                            
+                           
                             }
                           }
                         }
-
-
-
-                        if($etudiant->choix2 == "4553"){ // condition3 choix2
-                           if($places_disp_L3CM > 0){
-                         $places_disp_L3CM=$places_disp_L3CM-1;
-                          $orientation = "4553";
-                          }else{
-                             // aucune place disponible - traitement choix3
-                            if ($etudiant->choix3 <> NULL){
-                             if($etudiant->choix3 == "A454"){
-                              if($places_disp_L3E > 0){
-                         $places_disp_L3E=$places_disp_L3E-1;
-                          $orientation = "A454";
-                          }else{echo "Tweswiss";}
-                             }
-                             if($etudiant->choix3 == "A459"){
-                              if($places_disp_L3GM > 0){
-                              $places_disp_L3GM=$places_disp_L3GM-1;
-                              $orientation = "A459";
-                              }else{echo "Tweswiss";}}
-                             if($etudiant->choix3 == "4553"){
-                              if($places_disp_L3CM > 0){
-                              $places_disp_L3CM=$places_disp_L3CM-1;
-                              $orientation = "4553";
-                              }else{echo "Tweswiss";}
-                             }
-                            }
-                          }
-                        }
+                 
                  }
                } 
               } 
@@ -760,7 +618,6 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
            }else{
            // fiche de voeux non remplie : fichevoeux_remp = 0
             $nombre_elements = count($file_attente); 
-            echo "<br> nombre d elements : ".$nombre_elements;
              if ($nombre_elements == 0) {
                 $file_attente[0] = $etudiant;
              }else{
@@ -799,8 +656,7 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
                }
              }
             // continuer dans la boucle for de la file d'attente
-                 echo "<br>********************* <br>";
-                 echo "<br>orient file att : ".$orientation_fa;
+                
                 
                 DB::table('gm')-> where([
      ['matricule', '=', $file_attente[$j]->matricule],
@@ -850,6 +706,61 @@ public function refaire_traitement(){
              return back();
 
         }
+ //----------------------------------------------------------------------------------
+         public function export_GMtotal() 
+    {
+        return Excel::download(new GMTotalExport, 'Total GM.xlsx');
+        
+    }
+ //----------------------------------------------------------------------------------
+    public function export_section_H() 
+    {
+        return Excel::download(new SectionHExport, 'GM section H.xlsx');
+        
+    }
+ //----------------------------------------------------------------------------------
+    public function export_section_I() 
+    {
+        return Excel::download(new SectionIExport, 'GM section I.xlsx');
+        
+    }
+ //----------------------------------------------------------------------------------
+    public function export_section_J() 
+    {
+        return Excel::download(new SectionJExport, 'GM section J.xlsx');
+        
+    }
+ //----------------------------------------------------------------------------------
+    public function export_section_K() 
+    {
+        return Excel::download(new SectionKExport, 'GM section K.xlsx');
+        
+    }
+    //----------------------------------------------------------------------------------
+    public function export_section_L() 
+    {
+        return Excel::download(new SectionLExport, 'GM section L.xlsx');
+        
+    }
+
+    //----------------------------------------------------------------------------------
+    public function export_spec_L3E() 
+    {
+        return Excel::download(new SpecialiteEnergExport, 'GM spécialité Energ.xlsx');
+        
+    }
+    //----------------------------------------------------------------------------------
+    public function export_spec_L3GM() 
+    {
+        return Excel::download(new SpecialiteGMExport, 'GM spécialité GM.xlsx');
+        
+    }
+    //----------------------------------------------------------------------------------
+    public function export_spec_L3CM() 
+    {
+        return Excel::download(new SpecialiteCMExport, 'GM spécialité CM.xlsx');
+        
+    }
 
 
 }
