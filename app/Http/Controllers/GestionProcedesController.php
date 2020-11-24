@@ -68,7 +68,7 @@ class GestionProcedesController extends Controller
      ])->update(['choix1' => $fiche->choix1,'choix2' => $fiche->choix2,'fichevoeux_remp' => '1']);
                  }
                      // calcul mc = MG * (1-0.04*(R+session/4))
-        DB::statement("UPDATE `gp` SET `mc`= `moy_an`*(1-0.04*(`r`+(`session`/4))) WHERE `fichevoeux_remp`= '1' ");
+        DB::statement("UPDATE `gp` SET `mc`= `moy_an`*(1-0.04*(`r`+(`session`/4))) ");
          
           }
 

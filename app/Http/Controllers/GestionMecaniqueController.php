@@ -28,7 +28,7 @@ class GestionMecaniqueController extends Controller
       DB::table('gm')->
       where([
      ['matricule', '=', $etudiant->matricule ],
-     ['nom_prenom', '=', $etudiant->nom_prenom],
+    
      ])->delete();
         	
          }
@@ -41,41 +41,46 @@ class GestionMecaniqueController extends Controller
         
         // calcul R : années de retard
           $annee_cours = date("Y"); 
+          $annee_cours ="2019";
           $matricule_errone = '0';
        
          $fiches = DB::table('fichevoeuxgm')-> select('matricule','nom','prenom','choix1','choix2','choix3','nationalite')->get();
 
           foreach ($fiches as $fiche) {
+            $matric = substr($fiche->matricule,1,12);
           	$NP = $fiche->nom." ".$fiche->prenom;
-            $num_matricule =substr($fiche->matricule,0,2);
+            $num_matricule =substr($fiche->matricule,1,2);
             if($num_matricule == "20"){
-               $annee_matricule =substr($fiche->matricule,0,4);
+               $annee_matricule =substr($fiche->matricule,1,4);
            
             }else{ $annee_matricule = "20".$num_matricule;}
            
             $difference = intval($annee_cours)-intval($annee_matricule);
             if($difference >= 2)  
             	{
+                $r=0;
                 if($fiche->nationalite == "213")
                   { $r = $difference-2; }
                   else{
                     if($fiche->nationalite == null){ $r = $difference-2; }else{ $r = $difference-4;}
                   
                   }
-              
+             
       DB::table('gm')-> where([
-     ['matricule', '=', $fiche->matricule],
-    ['nom_prenom', '=', $NP]
+     ['matricule', '=', $matric],
+     ['nom_prenom', '=', $NP],
      ])->update(['r' => $r]);  
 
               }
+               echo "etudiant de matricule : ".$fiche->matricule." | année en cours : ".$annee_cours." | année matricule : ".$annee_matricule." | r : ".$r." | choix 1 / choix2 / choix3 :  ". $fiche->choix1."/ ".$fiche->choix2."/ ".$fiche->choix3."<br>";
+              if( ($fiche->choix1 <> null) and ($fiche->choix2 <> null) and ($fiche->choix3 <> null) ){$fichevoeux_remp_null='1';}else{$fichevoeux_remp_null='0';}
                  DB::table('gm')-> where([
-     ['matricule', '=', $fiche->matricule],
-    ['nom_prenom', '=', $NP]
-     ])->update(['choix1' => $fiche->choix1,'choix2' => $fiche->choix2,'choix3' => $fiche->choix3,'fichevoeux_remp' => '1']);
+     ['matricule', '=', $matric],
+     ['nom_prenom', '=', $NP],
+     ])->update(['choix1' => $fiche->choix1,'choix2' => $fiche->choix2,'choix3' => $fiche->choix3,'fichevoeux_remp' => $fichevoeux_remp_null]);
                  }
                      // calcul mc = MG * (1-0.04*(R+session/4))
-        DB::statement("UPDATE `gm` SET `mc`= `moy_an`*(1-0.04*(`r`+(`session`/4))) WHERE `fichevoeux_remp`= '1' ");
+        DB::statement("UPDATE `gm` SET `mc`= `moy_an`*(1-0.04*(`r`+(`session`/4)))");
          
           }
  //--------------------------------
@@ -444,6 +449,14 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
       $places_disp_L3E = $places_dispo_par_spec['L3E'];
       $places_disp_L3GM = $places_dispo_par_spec['L3GM'];
       $places_disp_L3CM = $places_dispo_par_spec['L3CM'];
+
+
+      echo "<br>nombre de personnes à orienter :".self::calcul_total_orient_X();     
+      echo "<br>places dispos pour la section : ".$section;
+      echo "<br>L3E : ".$places_disp_L3E;
+      echo "<br>L3GM : ".$places_disp_L3GM;
+      echo "<br>L3CM : ".$places_disp_L3CM;
+
       // faire le classement selon la moyenne corrigée pour chaque section
           $etudiants_section_classes_par_mc = DB::table('gm')->
               where('section','=',$section)->
@@ -761,10 +774,11 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
            }else{
            // fiche de voeux non remplie : fichevoeux_remp = 0
             $nombre_elements = count($file_attente); 
+            echo "<br> nombre d elements : ".$nombre_elements;
              if ($nombre_elements == 0) {
                 $file_attente[0] = $etudiant;
              }else{
-              $file_attente[$nombre_elements-1] = $etudiant;
+              $file_attente[$nombre_elements] = $etudiant;
              }
                     
           
@@ -799,6 +813,8 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
                }
              }
             // continuer dans la boucle for de la file d'attente
+                 echo "<br>********************* <br>";
+                 echo "<br>orient file att : ".$orientation_fa;
                 
                 DB::table('gm')-> where([
      ['matricule', '=', $file_attente[$j]->matricule],
@@ -831,12 +847,12 @@ public function recup_nbr_orient_par_sect($section){
     public function pretraitement_traitement(){
     
     //----------------------------------Prétraitement-------------------------
-        // self::supp_ajr_l2();    
-        // self::supp_doublants_l2l3();
-        // self::calcul_mc();
+   self::supp_ajr_l2();    
+   self::supp_doublants_l2l3();
+   self::calcul_mc();
     //-----------------------------------Traitement---------------------------
-    self::orientation();
-    return back();
+   self::orientation();
+  return back();
         }
 
  //----------------------------------------------------------------------------------

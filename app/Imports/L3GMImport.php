@@ -19,7 +19,7 @@ class L3GMImport implements ToModel,WithHeadingRow
             'nom_prenom'     => $row['nom_prenom'],
             'resultat'     => $row['resultat'],
             'specialite'     => $row['specialite'],
-            'section'   => $row['section'],
+            
         ]);
     }
 }
