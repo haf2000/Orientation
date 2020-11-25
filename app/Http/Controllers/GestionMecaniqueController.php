@@ -761,6 +761,163 @@ public function refaire_traitement(){
         return Excel::download(new SpecialiteCMExport, 'GM spécialité CM.xlsx');
         
     }
+//----------------------------------------------------------------------------------
+    public function recup_data_voeux(){
+    $data_voeux = array('L3E','L3GM','L3CM');
+    $data_voeux['L3E'] = array('choix1','choix2','choix3','sans');
+    $data_voeux['L3GM'] = array('choix1','choix2','choix3','sans');
+    $data_voeux['L3CM'] = array('choix1','choix2','choix3','sans');
+    
+    $data_voeux['L3E']['choix1'] = 0;
+    $data_voeux['L3E']['choix2'] = 0;
+    $data_voeux['L3E']['choix3'] = 0;
+    $data_voeux['L3E']['sans'] = 0;
+    
+    $data_voeux['L3GM']['choix1'] = 0;
+    $data_voeux['L3GM']['choix2'] = 0;
+    $data_voeux['L3GM']['choix3'] = 0;
+    $data_voeux['L3GM']['sans'] = 0;
 
+    $data_voeux['L3CM']['choix1'] = 0;
+    $data_voeux['L3CM']['choix2'] = 0;
+    $data_voeux['L3CM']['choix3'] = 0;
+    $data_voeux['L3CM']['sans'] = 0;
+     
+
+     $etudiants = DB::table('gm')->
+              select('choix1','choix2','choix3','orientation','fichevoeux_remp')
+              ->get();
+
+    foreach ($etudiants as $etudiant) {
+     if(($etudiant->fichevoeux_remp == '1') and ($etudiant->choix1 <> null) and($etudiant->choix2 <> null) and ($etudiant->choix3 <> null)){
+        // choix non null et a remplie fiche de voeux
+          if($etudiant->orientation == $etudiant->choix1){
+            // orienté vers le choix 1
+            if($etudiant->choix1 == "A454"){
+              // L3E
+                   $data_voeux['L3E']['choix1'] = $data_voeux['L3E']['choix1']+1; 
+            }else{
+              // autre : L3GM - L3CM
+               if($etudiant->choix1 == "A459"){
+                  // choix L3GM
+                 $data_voeux['L3GM']['choix1'] = $data_voeux['L3GM']['choix1']+1; 
+               }else{ 
+                  // choix L3CM
+                 $data_voeux['L3CM']['choix1'] = $data_voeux['L3CM']['choix1']+1; 
+               }
+            }
+          }else{
+               // orienté vers le choix 2 ou choix 3
+             if($etudiant->orientation == $etudiant->choix2){
+              // orienté vers le choix 2
+                 if($etudiant->choix2 == "A454"){
+              // L3E
+                   $data_voeux['L3E']['choix2'] = $data_voeux['L3E']['choix2']+1; 
+            }else{
+              // autre : L3GM - L3CM
+               if($etudiant->choix2 == "A459"){
+                  // choix L3GM
+                 $data_voeux['L3GM']['choix2'] = $data_voeux['L3GM']['choix2']+1; 
+               }else{ 
+                  // choix L3CM
+                 $data_voeux['L3CM']['choix2'] = $data_voeux['L3CM']['choix2']+1; 
+               }
+            }
+
+             }else{
+              // orienté vers le choix 3
+                if($etudiant->choix3 == "A454"){
+              // L3E
+                   $data_voeux['L3E']['choix3'] = $data_voeux['L3E']['choix3']+1; 
+            }else{
+              // autre : L3GM - L3CM
+               if($etudiant->choix3 == "A459"){
+                  // choix L3GM
+                 $data_voeux['L3GM']['choix3'] = $data_voeux['L3GM']['choix3']+1; 
+               }else{ 
+                  // choix L3CM
+                 $data_voeux['L3CM']['choix3'] = $data_voeux['L3CM']['choix3']+1; 
+               }
+            }
+             }
+          }
+     }else{
+        // soit n'a pas rempli fiche de voeux, soit n'existe pas dans la table de fiches de voeux
+        if($etudiant->orientation == "A454"){
+              // orienté L3E
+           $data_voeux['L3E']['sans'] = $data_voeux['L3E']['sans']+1; 
+
+        }else{
+              // orienté L3GM-L3CM
+           if($etudiant->orientation == "A459"){
+              // orienté L3GM
+           $data_voeux['L3GM']['sans'] = $data_voeux['L3GM']['sans']+1; 
+
+           }else{
+              // orienté L3CM
+           $data_voeux['L3CM']['sans'] = $data_voeux['L3CM']['sans']+1; 
+           }
+
+        }
+     }
+
+    }
+      return $data_voeux;
+    }
+
+//---------------------------------------------------
+    public function recup_min_max(){
+     $resultat = array('A','B','C','D','E');
+    $resultat['A'] = array('min','max');
+    $resultat['B'] = array('min','max');
+    $resultat['C'] = array('min','max');
+    $resultat['D'] = array('min','max');
+    $resultat['E'] = array('min','max');
+
+     $etudiants = DB::table('gm')
+    ->where('section','=','A')
+    ->selectRaw('min(mc) as min_mc, max(mc) as max_mc')
+    ->get();
+    foreach ($etudiants as $etudiant) {
+      $resultat['A']['min'] = $etudiant->min_mc;
+      $resultat['A']['max'] = $etudiant->max_mc;
+    }
+
+    $etudiants = DB::table('gm')
+    ->where('section','=','B')
+    ->selectRaw('min(mc) as min_mc, max(mc) as max_mc')
+    ->get();
+    foreach ($etudiants as $etudiant) {
+      $resultat['B']['min'] = $etudiant->min_mc;
+      $resultat['B']['max'] = $etudiant->max_mc;
+    }
+
+    $etudiants = DB::table('gm')
+    ->where('section','=','C')
+    ->selectRaw('min(mc) as min_mc, max(mc) as max_mc')
+    ->get();
+    foreach ($etudiants as $etudiant) {
+      $resultat['C']['min'] = $etudiant->min_mc;
+      $resultat['C']['max'] = $etudiant->max_mc;
+    }
+
+     $etudiants = DB::table('gm')
+    ->where('section','=','D')
+    ->selectRaw('min(mc) as min_mc, max(mc) as max_mc')
+    ->get();
+    foreach ($etudiants as $etudiant) {
+      $resultat['D']['min'] = $etudiant->min_mc;
+      $resultat['D']['max'] = $etudiant->max_mc;
+    }
+    $etudiants = DB::table('gm')
+    ->where('section','=','E')
+    ->selectRaw('min(mc) as min_mc, max(mc) as max_mc')
+    ->get();
+    foreach ($etudiants as $etudiant) {
+      $resultat['E']['min'] = $etudiant->min_mc;
+      $resultat['E']['max'] = $etudiant->max_mc;
+    }
+      return $resultat;
+    }
 
 }

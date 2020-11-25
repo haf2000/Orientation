@@ -23,6 +23,8 @@ class HomeController extends Controller
     {
        $var = new GestionMecaniqueController();
        $places_dispo_spec_section=$var->calcul_places_dispo_section_specialite();
-        return view('dashboard',compact('places_dispo_spec_section'));
+       $data_voeux = $var->recup_data_voeux();
+       $resultat = $var->recup_min_max();
+        return view('dashboard',compact('places_dispo_spec_section','data_voeux','resultat'));
     }
 }
