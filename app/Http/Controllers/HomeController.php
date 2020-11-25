@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\GestionMecaniqueController;
 class HomeController extends Controller
 {
     /**
@@ -21,6 +21,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+       $var = new GestionMecaniqueController();
+       $places_dispo_spec_section=$var->calcul_places_dispo_section_specialite();
+        return view('dashboard',compact('places_dispo_spec_section'));
     }
 }
