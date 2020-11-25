@@ -6,10 +6,12 @@
         <ul class="nav">
             <li @if ($pageSlug == 'dashboard') class="active " @endif>
                 <a href="{{ route('home') }}">
-                    <i class="tim-icons icon-chart-bar-32"></i>
+                    <i class="tim-icons icon-align-left-2"></i>
                     <p>{{ __('Accueil') }}</p>
                 </a>
             </li>
+
+
             <li @if ($pageSlug == 'profile') class="active " @endif>
                 <a href="{{ route('profile.edit')  }}">
                     <i class="tim-icons icon-single-02"></i>
@@ -41,6 +43,32 @@
                     </ul>
                 </div>
             </li>
+
+          <li>
+                <a data-toggle="collapse" href="#laravel-exampl" aria-expanded="true">
+                    <i class="tim-icons icon-laptop" ></i>
+                    <span class="nav-link-text" >{{ __('Statistiques') }}</span>
+                    <b class="caret mt-1"></b>
+                </a>
+
+                <div class="collapse show" id="laravel-exampl">
+                    <ul class="nav pl-4">
+                        <li @if ($pageSlug == 'stat') class="active " @endif>
+                            <a href="{{ route('stat')  }}">
+                                <i class="tim-icons icon-minimal-right"></i>
+                                <p>{{ __('Statistiques GM') }}</p>
+                            </a>
+                        </li>
+                        <li @if ($pageSlug == 'stat2') class="active " @endif>
+                            <a href="{{ route('stat2')  }}">
+                                <i class="tim-icons icon-minimal-right"></i>
+                                <p>{{ __('Statistiques GP') }}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
         </ul>
     </div>
 </div>

@@ -570,5 +570,125 @@ public function calcul_total_orient_X(){
         return Excel::download(new SpecialiteRPExport, 'GP spécialité RP.xlsx');
         
     }
+  //----------------------------------------------------------------------------------
+    public function recup_data_voeux(){
+    $data_voeux = array('GP','RP');
+    $data_voeux['GP'] = array('choix1','choix2','sans');
+    $data_voeux['RP'] = array('choix1','choix2','sans');
+    
+    $data_voeux['GP']['choix1'] = 0;
+    $data_voeux['GP']['choix2'] = 0;
+    $data_voeux['GP']['sans'] = 0;
+    
+    $data_voeux['RP']['choix1'] = 0;
+    $data_voeux['RP']['choix2'] = 0;
+    $data_voeux['RP']['sans'] = 0;
+
+
+     $etudiants = DB::table('gp')->
+              select('choix1','choix2','orientation','fichevoeux_remp')
+              ->get();
+
+    foreach ($etudiants as $etudiant) {
+     if(($etudiant->fichevoeux_remp == '1') and ($etudiant->choix1 <> null) and($etudiant->choix2 <> null) ){
+        // choix non null et a remplie fiche de voeux
+          if($etudiant->orientation == $etudiant->choix1){
+            // orienté vers le choix 1
+            if($etudiant->choix1 == "57"){
+              // GP
+                   $data_voeux['GP']['choix1'] = $data_voeux['GP']['choix1']+1; 
+            }else{
+              // RP
+                 $data_voeux['RP']['choix1'] = $data_voeux['RP']['choix1']+1; 
+               
+            }
+          }else{
+             
+              // orienté vers le choix 2
+                 if($etudiant->choix2 == "57"){
+              // GP
+                   $data_voeux['GP']['choix2'] = $data_voeux['GP']['choix2']+1; 
+            }else{
+              // RP
+                 $data_voeux['RP']['choix2'] = $data_voeux['RP']['choix2']+1; 
+              
+            }
+
+            
+          }
+     }else{
+        // soit n'a pas rempli fiche de voeux, soit n'existe pas dans la table de fiches de voeux
+        if($etudiant->orientation == "57"){
+              // orienté L3E
+           $data_voeux['GP']['sans'] = $data_voeux['GP']['sans']+1; 
+
+        }else{
+             
+              // orienté L3GM
+           $data_voeux['RP']['sans'] = $data_voeux['RP']['sans']+1; 
+
+           
+
+        }
+     }
+
+    }
+      return $data_voeux;
+    }
+
+//---------------------------------------------------
+    public function recup_min_max(){
+     $resultat = array('A','B','C','D','E');
+    $resultat['A'] = array('min','max');
+    $resultat['B'] = array('min','max');
+    $resultat['C'] = array('min','max');
+    $resultat['D'] = array('min','max');
+    $resultat['E'] = array('min','max');
+
+     $etudiants = DB::table('gp')
+    ->where('section','=','A')
+    ->selectRaw('min(mc) as min_mc, max(mc) as max_mc')
+    ->get();
+    foreach ($etudiants as $etudiant) {
+      $resultat['A']['min'] = $etudiant->min_mc;
+      $resultat['A']['max'] = $etudiant->max_mc;
+    }
+
+    $etudiants = DB::table('gp')
+    ->where('section','=','B')
+    ->selectRaw('min(mc) as min_mc, max(mc) as max_mc')
+    ->get();
+    foreach ($etudiants as $etudiant) {
+      $resultat['B']['min'] = $etudiant->min_mc;
+      $resultat['B']['max'] = $etudiant->max_mc;
+    }
+
+    $etudiants = DB::table('gp')
+    ->where('section','=','C')
+    ->selectRaw('min(mc) as min_mc, max(mc) as max_mc')
+    ->get();
+    foreach ($etudiants as $etudiant) {
+      $resultat['C']['min'] = $etudiant->min_mc;
+      $resultat['C']['max'] = $etudiant->max_mc;
+    }
+
+     $etudiants = DB::table('gp')
+    ->where('section','=','D')
+    ->selectRaw('min(mc) as min_mc, max(mc) as max_mc')
+    ->get();
+    foreach ($etudiants as $etudiant) {
+      $resultat['D']['min'] = $etudiant->min_mc;
+      $resultat['D']['max'] = $etudiant->max_mc;
+    }
+    $etudiants = DB::table('gp')
+    ->where('section','=','E')
+    ->selectRaw('min(mc) as min_mc, max(mc) as max_mc')
+    ->get();
+    foreach ($etudiants as $etudiant) {
+      $resultat['E']['min'] = $etudiant->min_mc;
+      $resultat['E']['max'] = $etudiant->max_mc;
+    }
+      return $resultat;
+    }
 
 }

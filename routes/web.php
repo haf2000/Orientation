@@ -21,6 +21,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
+Route::get('/stat', 'HomeController@index2')->name('stat');
+Route::get('/stat2', 'HomeController@index3')->name('stat2');
 
 Route::get('/gm', 'GmController@gm')->name('gm');
 Route::get('/gp', 'GpController@gp')->name('gp');
