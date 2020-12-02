@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent fixed-top">
+<nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent fixed-top" >
     <div class="container-fluid">
         <div class="navbar-wrapper">
             <div class="navbar-toggle d-inline">
@@ -18,15 +18,15 @@
         <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="{{ route('welcome') }}" class="nav-link text-primary">
+                    <a href="{{ route('welcome') }}" class="nav-link ">
                         <i class="tim-icons icon-minimal-left"></i> {{ __('Page d\'accueil') }}
                     </a>
                 </li>
-                <li class="nav-item ">
+               <!--  <li class="nav-item ">
                     <a href="{{ route('register') }}" class="nav-link">
                         <i class="tim-icons icon-laptop"></i> {{ __('S\'inscrire') }}
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item ">
                     <a href="{{ route('login') }}" class="nav-link">
                         <i class="tim-icons icon-single-02"></i> {{ __('Se connecter') }}

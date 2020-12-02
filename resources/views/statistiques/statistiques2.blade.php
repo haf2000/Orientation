@@ -1,4 +1,4 @@
-@extends('layouts.app', ['pageSlug' => 'stat2'])
+@extends('layouts.app', ['page' => __('Statistiques GP'),'pageSlug' => 'stat2'])
 
 @section('content')
 
@@ -148,7 +148,7 @@
                           </div>
                       </div>
                       <div class="card-body">
-                  <table class="table tablesorter" id="">
+                  <table class="table tablesorter text-center" id="">
                             <thead class=" text-primary">
                                 <tr>
                                     <th style="color: #00f2c3;">

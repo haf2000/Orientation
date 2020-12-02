@@ -4,15 +4,16 @@
             <a href="#" class="simple-text logo-normal">{{ __('LOGO') }}</a>
         </div>
         <ul class="nav">
-            <li @if ($pageSlug == 'dashboard') class="active " @endif>
+            <li @if ($pageSlug  == 'dashboard') class="active " @endif>
                 <a href="{{ route('home') }}">
                     <i class="tim-icons icon-align-left-2"></i>
                     <p>{{ __('Accueil') }}</p>
                 </a>
             </li>
+            
 
 
-            <li @if ($pageSlug == 'profile') class="active " @endif>
+            <li @if ($pageSlug  == 'profile') class="active " @endif>
                 <a href="{{ route('profile.edit')  }}">
                     <i class="tim-icons icon-single-02"></i>
                     <p>{{ __('Profile utilisateur') }}</p>
@@ -28,13 +29,13 @@
 
                 <div class="collapse show" id="laravel-examples">
                     <ul class="nav pl-4">
-                        <li @if ($pageSlug == 'gm') class="active " @endif>
+                        <li @if ($pageSlug  == 'gm') class="active " @endif>
                             <a href="{{ route('gm')  }}">
                                 <i class="tim-icons icon-minimal-right"></i>
                                 <p>{{ __('Génie Mécanique') }}</p>
                             </a>
                         </li>
-                        <li @if ($pageSlug == 'gp') class="active " @endif>
+                        <li @if ($pageSlug  == 'gp') class="active " @endif>
                             <a href="{{ route('gp')  }}">
                                 <i class="tim-icons icon-minimal-right"></i>
                                 <p>{{ __('Génie Procédés') }}</p>
@@ -53,13 +54,13 @@
 
                 <div class="collapse show" id="laravel-exampl">
                     <ul class="nav pl-4">
-                        <li @if ($pageSlug == 'stat') class="active " @endif>
+                        <li @if ($pageSlug  == 'stat') class="active " @endif>
                             <a href="{{ route('stat')  }}">
                                 <i class="tim-icons icon-minimal-right"></i>
                                 <p>{{ __('Statistiques GM') }}</p>
                             </a>
                         </li>
-                        <li @if ($pageSlug == 'stat2') class="active " @endif>
+                        <li @if ($pageSlug  == 'stat2') class="active " @endif>
                             <a href="{{ route('stat2')  }}">
                                 <i class="tim-icons icon-minimal-right"></i>
                                 <p>{{ __('Statistiques GP') }}</p>

@@ -4,7 +4,14 @@
 <div class="row" style="display: inline;">
   
 <div class="card card-white">
-                
+                 <div class="card-header">
+                   @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                   {{ session('status') }}
+                   </div>
+                 @endif
+
+                 </div>
                 <div class="card-body">
                     <p class="text-dark text-center mb-2" style="text-align: left;"><strong>Entrer la fiche de voeux et les PVs de délibération L3 de cette année</strong></p>
                      

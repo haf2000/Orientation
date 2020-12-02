@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app',['pageSlug' => 'welcome page'])
 
 @section('content')
          
@@ -20,12 +20,7 @@
                                  </a>  
                                </div>
                                        
-                                  
                                                                
-                               <!-- <h6 class="text-white" style="font-weight:lighter; ">
-                                    {{ __('Votre chemin d\'orientation est notre responsabilité ') }}
-                                </h6> -->
-                                
                             </div>
                         </div>
                     </div>

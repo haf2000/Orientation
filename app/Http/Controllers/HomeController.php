@@ -43,4 +43,9 @@ class HomeController extends Controller
        $resultat = $var->recup_min_max();
         return view('statistiques.statistiques2',compact('places_dispo_spec_section','data_voeux','resultat'));
     }
+
+     public function index4()
+    {
+        return view('student');
+    }
 }

@@ -126,7 +126,17 @@ public function calcul_ajr_par_specialiteL3()
   return $x;
  }
  //--------------------------------
- 
+ public function arrondi($nombre){
+   $partie_flottante = $nombre - floor($nombre);
+   if ($partie_flottante >= 0.5){
+     $resultat = floor($nombre) + 1;
+   }
+   else{
+    $resultat = $nombre - $partie_flottante;
+    }
+    return $resultat;
+ }
+ //--------------------------------
   public function calcul_nbr_places_disp_pr_chaque_specialite(){
 /*Zi = ( (X+Total des ajournés L3)/3  ) - Nombre des ajournés par spécialité*/
    $places_disp_par_spec = array("L3E" => 0,"L3GM" => 0,"L3CM" => 0) ;
@@ -135,46 +145,51 @@ public function calcul_ajr_par_specialiteL3()
    
    $total_ajournes = intval($nombre_ajournes_par_spec["L3E"])+intval($nombre_ajournes_par_spec["L3GM"])+intval($nombre_ajournes_par_spec["L3CM"]);
   
-  $places_disp_par_spec_float_L3E = (($x+$total_ajournes)/3) - intval($nombre_ajournes_par_spec["L3E"]); 
-  $places_disp_par_spec_float_L3GM = (($x+$total_ajournes)/3) - intval($nombre_ajournes_par_spec["L3GM"]); 
-  $places_disp_par_spec_float_L3CM = (($x+$total_ajournes)/3) - intval($nombre_ajournes_par_spec["L3CM"]); 
+  // $places_disp_par_spec_float_L3E = (($x+$total_ajournes)/3) - intval($nombre_ajournes_par_spec["L3E"]); 
+  // $places_disp_par_spec_float_L3GM = (($x+$total_ajournes)/3) - intval($nombre_ajournes_par_spec["L3GM"]); 
+  // $places_disp_par_spec_float_L3CM = (($x+$total_ajournes)/3) - intval($nombre_ajournes_par_spec["L3CM"]); 
   
-  $afficher_l3e =  $places_disp_par_spec_float_L3E;
-  $afficher_l3gm =  $places_disp_par_spec_float_L3GM;
-  $afficher_l3cm =  $places_disp_par_spec_float_L3CM;
 
+  // $places_disp_par_spec_float_L3E =  $places_disp_par_spec_float_L3E - floor( $places_disp_par_spec_float_L3E );
+  // $places_disp_par_spec_float_L3GM =  $places_disp_par_spec_float_L3GM - floor( $places_disp_par_spec_float_L3GM );
+  // $places_disp_par_spec_float_L3CM =  $places_disp_par_spec_float_L3CM - floor( $places_disp_par_spec_float_L3CM );
 
-  $places_disp_par_spec_float_L3E =  $places_disp_par_spec_float_L3E - floor( $places_disp_par_spec_float_L3E );
-  $places_disp_par_spec_float_L3GM =  $places_disp_par_spec_float_L3GM - floor( $places_disp_par_spec_float_L3GM );
-  $places_disp_par_spec_float_L3CM =  $places_disp_par_spec_float_L3CM - floor( $places_disp_par_spec_float_L3CM );
-
-  $places_disp_par_spec["L3E"] = ceil((($x+$total_ajournes)/3) - intval($nombre_ajournes_par_spec["L3E"]));
-  $places_disp_par_spec["L3GM"] = ceil((($x+$total_ajournes)/3) - intval($nombre_ajournes_par_spec["L3GM"])); 
-  $places_disp_par_spec["L3CM"] = ceil((($x+$total_ajournes)/3) - intval($nombre_ajournes_par_spec["L3CM"])); 
+  $places_disp_par_spec["L3E"] = self::arrondi((($x+$total_ajournes)/3) - intval($nombre_ajournes_par_spec["L3E"]));
+  $places_disp_par_spec["L3GM"] = self::arrondi((($x+$total_ajournes)/3) - intval($nombre_ajournes_par_spec["L3GM"])); 
+  $places_disp_par_spec["L3CM"] = self::arrondi((($x+$total_ajournes)/3) - intval($nombre_ajournes_par_spec["L3CM"])); 
  
 
   $total =$places_disp_par_spec["L3E"]+ $places_disp_par_spec["L3GM"]+ $places_disp_par_spec["L3CM"];
+
    $x =  self::calcul_total_orient_X();
+   
+
     while (  $x <>  $total) {
      if($x < $total){
-     $min = min( $places_disp_par_spec_float_L3E, $places_disp_par_spec_float_L3GM, $places_disp_par_spec_float_L3CM);
-     if($min ==  $places_disp_par_spec_float_L3E and  $places_disp_par_spec_float_L3E <> 1){
-      $places_disp_par_spec["L3E"] = $places_disp_par_spec["L3E"]-1;
-      $places_disp_par_spec_float_L3E = 1;
-     }else{
-       if($min ==  $places_disp_par_spec_float_L3GM and $places_disp_par_spec_float_L3GM <> 1){
-     $places_disp_par_spec["L3GM"] = $places_disp_par_spec["L3GM"]-1;
-     $places_disp_par_spec_float_L3GM = 1;
-       }else{
-        if ($places_disp_par_spec_float_L3CM <> 1) {
-          $places_disp_par_spec["L3CM"]= $places_disp_par_spec["L3CM"]-1;
-      $places_disp_par_spec_float_L3CM = 1;
-        }
+     // $min = min( $places_disp_par_spec_float_L3E, $places_disp_par_spec_float_L3GM, $places_disp_par_spec_float_L3CM);
+     // if($min ==  $places_disp_par_spec_float_L3E and  $places_disp_par_spec_float_L3E <> 1){
+     //  $places_disp_par_spec["L3E"] = $places_disp_par_spec["L3E"]-1;
+     //  $places_disp_par_spec_float_L3E = 1;
+     // }else{
+     //   if($min ==  $places_disp_par_spec_float_L3GM and $places_disp_par_spec_float_L3GM <> 1){
+     // $places_disp_par_spec["L3GM"] = $places_disp_par_spec["L3GM"]-1;
+     // $places_disp_par_spec_float_L3GM = 1;
+     //   }else{
+     //    if ($places_disp_par_spec_float_L3CM <> 1) {
+     //      $places_disp_par_spec["L3CM"]= $places_disp_par_spec["L3CM"]-1;
+     //  $places_disp_par_spec_float_L3CM = 1;
+     //    }
     
-       }
-     }
-    
+     //   }
+     // }
+
+     $places_disp_par_spec["L3CM"] = $places_disp_par_spec["L3CM"] -1;
      $total = $total -1;
+     }else{
+        if($x > $total){
+     $places_disp_par_spec["L3E"] = $places_disp_par_spec["L3E"] +1;
+     $total = $total +1;
+        }
      }
     }
 
@@ -222,121 +237,126 @@ public function calcul_ajr_par_specialiteL3()
      $places_disp_par_spec = self::calcul_nbr_places_disp_pr_chaque_specialite();
        
       // section A
-     $matrice_A_L3E_float = ($taux_reussite['A'] * $places_disp_par_spec['L3E'] )- floor($taux_reussite['A'] * $places_disp_par_spec['L3E']);
-     $matrice_A_L3GM_float = ($taux_reussite['A'] * $places_disp_par_spec['L3GM'])- floor($taux_reussite['A'] * $places_disp_par_spec['L3GM']);
-     $matrice_A_L3CM_float = ($taux_reussite['A'] * $places_disp_par_spec['L3CM']) - floor ($taux_reussite['A'] * $places_disp_par_spec['L3CM']);
+     // $matrice_A_L3E_float = ($taux_reussite['A'] * $places_disp_par_spec['L3E'] )- floor($taux_reussite['A'] * $places_disp_par_spec['L3E']);
+     // $matrice_A_L3GM_float = ($taux_reussite['A'] * $places_disp_par_spec['L3GM'])- floor($taux_reussite['A'] * $places_disp_par_spec['L3GM']);
+     // $matrice_A_L3CM_float = ($taux_reussite['A'] * $places_disp_par_spec['L3CM']) - floor ($taux_reussite['A'] * $places_disp_par_spec['L3CM']);
 
-     $matrice['A']['L3E'] =  ceil($taux_reussite['A'] * $places_disp_par_spec['L3E']);
-     $matrice['A']['L3GM'] =  ceil($taux_reussite['A'] * $places_disp_par_spec['L3GM']);
-     $matrice['A']['L3CM'] =  ceil($taux_reussite['A'] * $places_disp_par_spec['L3CM']);  
+     $matrice['A']['L3E'] =  self::arrondi($taux_reussite['A'] * $places_disp_par_spec['L3E']);
+     $matrice['A']['L3GM'] =  self::arrondi($taux_reussite['A'] * $places_disp_par_spec['L3GM']);
+     $matrice['A']['L3CM'] =  self::arrondi($taux_reussite['A'] * $places_disp_par_spec['L3CM']);  
 
      $x =  self::recup_nbr_orient_par_sect('A');
      $total = $matrice['A']['L3E'] + $matrice['A']['L3GM']+ $matrice['A']['L3CM'];
 
     while (  $x <>  $total) {
      if($x < $total){
-     $min = min($matrice_A_L3E_float,$matrice_A_L3GM_float,$matrice_A_L3CM_float);
-     if($min == $matrice_A_L3E_float and  $matrice_A_L3E_float <> 1){
-       $matrice['A']['L3E'] =  $matrice['A']['L3E'] -1;
-       $matrice_A_L3E_float = 1;
-     }else{
-       if($min == $matrice_A_L3GM_float and $matrice_A_L3GM_float <> 1  ){
-           $matrice['A']['L3GM'] =  $matrice['A']['L3GM'] -1;
-           $matrice_A_L3GM_float = 1;
-       }else{
-        if ( $matrice_A_L3CM_float <> 1  ) {
-          $matrice['A']['L3CM'] =  $matrice['A']['L3CM'] -1;
-           $matrice_A_L3CM_float = 1;
-        }
+     // $min = min($matrice_A_L3E_float,$matrice_A_L3GM_float,$matrice_A_L3CM_float);
+     // if($min == $matrice_A_L3E_float and  $matrice_A_L3E_float <> 1){
+     //   $matrice['A']['L3E'] =  $matrice['A']['L3E'] -1;
+     //   $matrice_A_L3E_float = 1;
+     // }else{
+     //   if($min == $matrice_A_L3GM_float and $matrice_A_L3GM_float <> 1  ){
+     //       $matrice['A']['L3GM'] =  $matrice['A']['L3GM'] -1;
+     //       $matrice_A_L3GM_float = 1;
+     //   }else{
+     //    if ( $matrice_A_L3CM_float <> 1  ) {
+     //      $matrice['A']['L3CM'] =  $matrice['A']['L3CM'] -1;
+     //       $matrice_A_L3CM_float = 1;
+     //    }
     
-       }
-     }
-    
+     //   }
+     // }
+     $matrice['A']['L3CM'] = $matrice['A']['L3CM'] -1;
      $total = $total -1;
+     }else{
+      if($x > $total){
+        $matrice['A']['L3E'] = $matrice['A']['L3E'] +1;
+     $total = $total +1;
+      }
      }
     }
 
 
       // section B
 
-$matrice_B_L3E_float = ($taux_reussite['B'] * $places_disp_par_spec['L3E'] )- floor($taux_reussite['B'] * $places_disp_par_spec['L3E']);
-     $matrice_B_L3GM_float = ($taux_reussite['B'] * $places_disp_par_spec['L3GM'])- floor($taux_reussite['B'] * $places_disp_par_spec['L3GM']);
-     $matrice_B_L3CM_float = ($taux_reussite['B'] * $places_disp_par_spec['L3CM']) - floor ($taux_reussite['B'] * $places_disp_par_spec['L3CM']);
 
-     $matrice['B']['L3E'] =  ceil($taux_reussite['B'] * $places_disp_par_spec['L3E']);
-     $matrice['B']['L3GM'] =  ceil($taux_reussite['B'] * $places_disp_par_spec['L3GM']);
-     $matrice['B']['L3CM'] =  ceil($taux_reussite['B'] * $places_disp_par_spec['L3CM']);  
+
+     $matrice['B']['L3E'] =  self::arrondi($taux_reussite['B'] * $places_disp_par_spec['L3E']);
+     $matrice['B']['L3GM'] =  self::arrondi($taux_reussite['B'] * $places_disp_par_spec['L3GM']);
+     $matrice['B']['L3CM'] =  self::arrondi($taux_reussite['B'] * $places_disp_par_spec['L3CM']);  
 
      $x =  self::recup_nbr_orient_par_sect('B');
      $total = $matrice['B']['L3E'] + $matrice['B']['L3GM']+ $matrice['B']['L3CM'];
 
     while (  $x <>  $total) {
      if($x < $total){
-     $min = min($matrice_B_L3E_float,$matrice_B_L3GM_float,$matrice_B_L3CM_float);
-     if($min == $matrice_B_L3E_float and  $matrice_B_L3E_float <> 1){
-       $matrice['B']['L3E'] =  $matrice['B']['L3E'] -1;
-       $matrice_B_L3E_float = 1;
-     }else{
-       if($min == $matrice_B_L3GM_float and $matrice_B_L3GM_float <> 1  ){
-           $matrice['B']['L3GM'] =  $matrice['B']['L3GM'] -1;
-           $matrice_B_L3GM_float = 1;
-       }else{
-        if ( $matrice_B_L3CM_float <> 1  ) {
-          $matrice['B']['L3CM'] =  $matrice['B']['L3CM'] -1;
-           $matrice_B_L3CM_float = 1;
-        }
+     // $min = min($matrice_B_L3E_float,$matrice_B_L3GM_float,$matrice_B_L3CM_float);
+     // if($min == $matrice_B_L3E_float and  $matrice_B_L3E_float <> 1){
+     //   $matrice['B']['L3E'] =  $matrice['B']['L3E'] -1;
+     //   $matrice_B_L3E_float = 1;
+     // }else{
+     //   if($min == $matrice_B_L3GM_float and $matrice_B_L3GM_float <> 1  ){
+     //       $matrice['B']['L3GM'] =  $matrice['B']['L3GM'] -1;
+     //       $matrice_B_L3GM_float = 1;
+     //   }else{
+     //    if ( $matrice_B_L3CM_float <> 1  ) {
+     //      $matrice['B']['L3CM'] =  $matrice['B']['L3CM'] -1;
+     //       $matrice_B_L3CM_float = 1;
+     //    }
     
-       }
-     }
-    
+     //   }
+     // }
+    $matrice['B']['L3CM'] = $matrice['B']['L3CM'] -1;
      $total = $total -1;
+     }else{
+      if($x > $total){
+       $matrice['B']['L3E'] = $matrice['B']['L3E'] +1;
+     $total = $total +1;
+      }
      }
     }
 
       //section C
     
 
-$matrice_C_L3E_float = ($taux_reussite['C'] * $places_disp_par_spec['L3E'] )- floor($taux_reussite['C'] * $places_disp_par_spec['L3E']);
-     $matrice_C_L3GM_float = ($taux_reussite['C'] * $places_disp_par_spec['L3GM'])- floor($taux_reussite['C'] * $places_disp_par_spec['L3GM']);
-     $matrice_C_L3CM_float = ($taux_reussite['C'] * $places_disp_par_spec['L3CM']) - floor ($taux_reussite['C'] * $places_disp_par_spec['L3CM']);
-
-     $matrice['C']['L3E'] =  ceil($taux_reussite['C'] * $places_disp_par_spec['L3E']);
-     $matrice['C']['L3GM'] =  ceil($taux_reussite['C'] * $places_disp_par_spec['L3GM']);
-     $matrice['C']['L3CM'] =  ceil($taux_reussite['C'] * $places_disp_par_spec['L3CM']);  
+     $matrice['C']['L3E'] =  self::arrondi($taux_reussite['C'] * $places_disp_par_spec['L3E']);
+     $matrice['C']['L3GM'] =  self::arrondi($taux_reussite['C'] * $places_disp_par_spec['L3GM']);
+     $matrice['C']['L3CM'] =  self::arrondi($taux_reussite['C'] * $places_disp_par_spec['L3CM']);  
 
      $x =  self::recup_nbr_orient_par_sect('C');
      $total = $matrice['C']['L3E'] + $matrice['C']['L3GM']+ $matrice['C']['L3CM'];
 
     while (  $x <>  $total) {
      if($x < $total){
-     $min = min($matrice_C_L3E_float,$matrice_C_L3GM_float,$matrice_C_L3CM_float);
-     if($min == $matrice_C_L3E_float and  $matrice_C_L3E_float <> 1){
-       $matrice['C']['L3E'] =  $matrice['C']['L3E'] -1;
-       $matrice_C_L3E_float = 1;
-     }else{
-       if($min == $matrice_C_L3GM_float and $matrice_C_L3GM_float <> 1  ){
-           $matrice['C']['L3GM'] =  $matrice['C']['L3GM'] -1;
-           $matrice_C_L3GM_float = 1;
-       }else{
-        if ( $matrice_C_L3CM_float <> 1  ) {
-          $matrice['C']['L3CM'] =  $matrice['C']['L3CM'] -1;
-           $matrice_C_L3CM_float = 1;
-        }
+     // $min = min($matrice_C_L3E_float,$matrice_C_L3GM_float,$matrice_C_L3CM_float);
+     // if($min == $matrice_C_L3E_float and  $matrice_C_L3E_float <> 1){
+     //   $matrice['C']['L3E'] =  $matrice['C']['L3E'] -1;
+     //   $matrice_C_L3E_float = 1;
+     // }else{
+     //   if($min == $matrice_C_L3GM_float and $matrice_C_L3GM_float <> 1  ){
+     //       $matrice['C']['L3GM'] =  $matrice['C']['L3GM'] -1;
+     //       $matrice_C_L3GM_float = 1;
+     //   }else{
+     //    if ( $matrice_C_L3CM_float <> 1  ) {
+     //      $matrice['C']['L3CM'] =  $matrice['C']['L3CM'] -1;
+     //       $matrice_C_L3CM_float = 1;
+     //    }
     
-       }
-     }
-    
+     //   }
+     // }
+      $matrice['C']['L3CM'] =  $matrice['C']['L3CM'] -1;
      $total = $total -1;
+     }else{
+       if($x > $total){
+       $matrice['C']['L3E'] = $matrice['C']['L3E'] + 1;
+       $total = $total +1;
+       }
      }
     }
 
 
 
       // section D
-
-$matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- floor($taux_reussite['D'] * $places_disp_par_spec['L3E']);
-     $matrice_D_L3GM_float = ($taux_reussite['D'] * $places_disp_par_spec['L3GM'])- floor($taux_reussite['D'] * $places_disp_par_spec['L3GM']);
-     $matrice_D_L3CM_float = ($taux_reussite['D'] * $places_disp_par_spec['L3CM']) - floor ($taux_reussite['D'] * $places_disp_par_spec['L3CM']);
 
      $matrice['D']['L3E'] =  ceil($taux_reussite['D'] * $places_disp_par_spec['L3E']);
      $matrice['D']['L3GM'] =  ceil($taux_reussite['D'] * $places_disp_par_spec['L3GM']);
@@ -347,35 +367,37 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
 
     while (  $x <>  $total) {
      if($x < $total){
-     $min = min($matrice_D_L3E_float,$matrice_D_L3GM_float,$matrice_D_L3CM_float);
+     // $min = min($matrice_D_L3E_float,$matrice_D_L3GM_float,$matrice_D_L3CM_float);
 
-     if($min == $matrice_D_L3E_float and  $matrice_D_L3E_float <> 1){
+     // if($min == $matrice_D_L3E_float and  $matrice_D_L3E_float <> 1){
 
-       $matrice['D']['L3E'] =  $matrice['D']['L3E'] -1;
-       $matrice_D_L3E_float = 1;
-     }else{
-       if($min == $matrice_D_L3GM_float and $matrice_D_L3GM_float <> 1  ){
-           $matrice['D']['L3GM'] =  $matrice['D']['L3GM'] -1;
-           $matrice_D_L3GM_float = 1;
-       }else{
-        if ( $matrice_D_L3CM_float <> 1  ) {
-          $matrice['D']['L3CM'] =  $matrice['D']['L3CM'] -1;
-           $matrice_D_L3CM_float = 1;
-        }
+     //   $matrice['D']['L3E'] =  $matrice['D']['L3E'] -1;
+     //   $matrice_D_L3E_float = 1;
+     // }else{
+     //   if($min == $matrice_D_L3GM_float and $matrice_D_L3GM_float <> 1  ){
+     //       $matrice['D']['L3GM'] =  $matrice['D']['L3GM'] -1;
+     //       $matrice_D_L3GM_float = 1;
+     //   }else{
+     //    if ( $matrice_D_L3CM_float <> 1  ) {
+     //      $matrice['D']['L3CM'] =  $matrice['D']['L3CM'] -1;
+     //       $matrice_D_L3CM_float = 1;
+     //    }
     
-       }
-     }
-    
+     //   }
+     // }
+      $matrice['D']['L3CM'] =  $matrice['D']['L3CM'] -1;    
      $total = $total -1;
+     }else{
+      if($x > $total){
+     $matrice['D']['L3E'] =  $matrice['D']['L3E'] +1;    
+     $total = $total +1;
+      }
      }
     }
 
 
       // section E
-    $matrice_E_L3E_float = ($taux_reussite['E'] * $places_disp_par_spec['L3E'] )- floor($taux_reussite['E'] * $places_disp_par_spec['L3E']);
-     $matrice_E_L3GM_float = ($taux_reussite['E'] * $places_disp_par_spec['L3GM'])- floor($taux_reussite['E'] * $places_disp_par_spec['L3GM']);
-     $matrice_E_L3CM_float = ($taux_reussite['E'] * $places_disp_par_spec['L3CM']) - floor ($taux_reussite['E'] * $places_disp_par_spec['L3CM']);
-
+ 
      $matrice['E']['L3E'] =  ceil($taux_reussite['E'] * $places_disp_par_spec['L3E']);
      $matrice['E']['L3GM'] =  ceil($taux_reussite['E'] * $places_disp_par_spec['L3GM']);
      $matrice['E']['L3CM'] =  ceil($taux_reussite['E'] * $places_disp_par_spec['L3CM']);  
@@ -385,26 +407,31 @@ $matrice_D_L3E_float = ($taux_reussite['D'] * $places_disp_par_spec['L3E'] )- fl
 
     while (  $x <>  $total) {
      if($x < $total){
-     $min = min($matrice_E_L3E_float,$matrice_E_L3GM_float,$matrice_E_L3CM_float);
+     // $min = min($matrice_E_L3E_float,$matrice_E_L3GM_float,$matrice_E_L3CM_float);
 
-     if($min == $matrice_E_L3E_float and  $matrice_E_L3E_float <> 1){
+     // if($min == $matrice_E_L3E_float and  $matrice_E_L3E_float <> 1){
 
-       $matrice['E']['L3E'] =  $matrice['E']['L3E'] -1;
-       $matrice_E_L3E_float = 1;
-     }else{
-       if($min == $matrice_E_L3GM_float and $matrice_E_L3GM_float <> 1  ){
-           $matrice['E']['L3GM'] =  $matrice['E']['L3GM'] -1;
-           $matrice_E_L3GM_float = 1;
-       }else{
-        if ( $matrice_E_L3CM_float <> 1  ) {
-          $matrice['E']['L3CM'] =  $matrice['E']['L3CM'] -1;
-           $matrice_E_L3CM_float = 1;
-        }
+     //   $matrice['E']['L3E'] =  $matrice['E']['L3E'] -1;
+     //   $matrice_E_L3E_float = 1;
+     // }else{
+     //   if($min == $matrice_E_L3GM_float and $matrice_E_L3GM_float <> 1  ){
+     //       $matrice['E']['L3GM'] =  $matrice['E']['L3GM'] -1;
+     //       $matrice_E_L3GM_float = 1;
+     //   }else{
+     //    if ( $matrice_E_L3CM_float <> 1  ) {
+     //      $matrice['E']['L3CM'] =  $matrice['E']['L3CM'] -1;
+     //       $matrice_E_L3CM_float = 1;
+     //    }
     
-       }
-     }
-    
+     //   }
+     // }
+     $matrice['E']['L3CM'] =  $matrice['E']['L3CM'] -1;    
      $total = $total -1;
+     }else{
+      if($x > $total){
+    $matrice['E']['L3E'] =  $matrice['E']['L3E'] +1;    
+     $total = $total +1;
+      }
      }
     } 
 
