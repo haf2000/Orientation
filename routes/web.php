@@ -34,6 +34,19 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 //Route::post('import', 'ImportL2GMController@import')->name('import');
 //Route::post('import2', 'ImportL2GMController@test')->name('import2');
 Route::post('import', 'ImportL2GMController@import')->name('import');
+Route::post('import2', 'ImportL2GMController@import2')->name('import2');
+Route::post('import3', 'ImportL2GMController@import3')->name('import3');
+Route::post('import4', 'ImportL2GMController@import4')->name('import4');
+Route::post('import5', 'ImportL2GMController@import5')->name('import5');
+
+Route::post('importL2GP', 'ImportL2GPController@import')->name('importL2GP');
+Route::post('importL2GP2', 'ImportL2GPController@import2')->name('importL2GP2');
+Route::post('importL2GP3', 'ImportL2GPController@import3')->name('importL2GP3');
+Route::post('importL2GP4', 'ImportL2GPController@import4')->name('importL2GP4');
+Route::post('importL2GP5', 'ImportL2GPController@import5')->name('importL2GP5');
+
+
+
 Route::post('importL3GM', 'ImportL3GMController@import')->name('importL3GM');
 Route::post('importFVGM', 'ImportFVGMController@import')->name('importFVGM');
 

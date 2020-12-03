@@ -11,6 +11,6 @@ class ImportL3GPController extends Controller
     {
         Excel::import(new L3GPImport,request()->file('file1'));
    
-   return back();
+   return back()->withStatus("Pv L3GM a bien été importé!");
     }
 }

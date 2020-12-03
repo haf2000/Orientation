@@ -11,6 +11,6 @@ class ImportFVGPController extends Controller
     {
         Excel::import(new FVGPImport,request()->file('file2'));
    
-   return back();
+        return back()->withStatus("Fiche de voeux GM a bien été importé!");
     }
 }

@@ -92,13 +92,19 @@
            {{ csrf_field() }}
 
             <div class="card card-white">
-                
+                 <div class="card-header">
+                   @if (session('status1'))
+                <div class="alert alert-success" role="alert">
+                   {{ session('status1') }}
+                   </div>
+                 @endif
+                 </div>
                 <div class="card-body">
                     <p class="text-dark text-center mb-2"><strong>Entrer le fichiers excel du PV L2</strong></p>
                      
                 
                 <p class="text-dark mb-2" style="text-align: left;"><strong>PV de délibération L2 de cette année : </strong></p>
-                <input type="file" name="file" class="form-control"><br>
+                <input type="file" name="file01" class="form-control"><br>
                 <br>
                 <button class="btn btn-success">Importer le PV L2</button>
                 
@@ -118,17 +124,24 @@
 
     <div id="sec2" class="modal" style="background-color: #fff;">
          
-<form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('import2') }}" method="POST" enctype="multipart/form-data">
            {{ csrf_field() }}
 
             <div class="card card-white">
-                
+                <div class="card-header">
+                   @if (session('status2'))
+                <div class="alert alert-success" role="alert">
+                   {{ session('status2') }}
+                   </div>
+                 @endif
+                 </div>
+    <!-- ------------------------------------------------ -->
                 <div class="card-body">
                     <p class="text-dark text-center mb-2"><strong>Entrer le fichiers excel du PV L2</strong></p>
                      
                 
                 <p class="text-dark mb-2" style="text-align: left;"><strong>PV de délibération L2 de cette année : </strong></p>
-                <input type="file" name="file" class="form-control"><br>
+                <input type="file" name="file02" class="form-control"><br>
                 <br>
                 <button class="btn btn-success">Importer le PV L2</button>
                 
@@ -147,17 +160,23 @@
     <!-- ----------------------------MODAL 3------------------------------------- -->
 <div id="sec3" class="modal" style="background-color: #fff;">
          
-<form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('import3') }}" method="POST" enctype="multipart/form-data">
            {{ csrf_field() }}
 
             <div class="card card-white">
-                
+                  <div class="card-header">
+                   @if (session('status3'))
+                <div class="alert alert-success" role="alert">
+                   {{ session('status3') }}
+                   </div>
+                 @endif
+                 </div>
                 <div class="card-body">
                     <p class="text-dark text-center mb-2"><strong>Entrer le fichiers excel du PV L2</strong></p>
                      
                 
                 <p class="text-dark mb-2" style="text-align: left;"><strong>PV de délibération L2 de cette année : </strong></p>
-                <input type="file" name="file" class="form-control"><br>
+                <input type="file" name="file03" class="form-control"><br>
                 <br>
                 <button class="btn btn-success">Importer le PV L2</button>
                 
@@ -176,17 +195,23 @@
     <!-- ----------------------------MODAL 4------------------------------------- -->
 <div id="sec4" class="modal" style="background-color: #fff;">
          
-<form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('import4') }}" method="POST" enctype="multipart/form-data">
            {{ csrf_field() }}
 
             <div class="card card-white">
-                
+                 <div class="card-header">
+                   @if (session('status4'))
+                <div class="alert alert-success" role="alert">
+                   {{ session('status4') }}
+                   </div>
+                 @endif
+                 </div>
                 <div class="card-body">
                     <p class="text-dark text-center mb-2"><strong>Entrer le fichiers excel du PV L2</strong></p>
                      
                 
                 <p class="text-dark mb-2" style="text-align: left;"><strong>PV de délibération L2 de cette année : </strong></p>
-                <input type="file" name="file" class="form-control"><br>
+                <input type="file" name="file04" class="form-control"><br>
                 <br>
                 <button class="btn btn-success">Importer le PV L2</button>
                 
@@ -205,17 +230,23 @@
     <!-- ----------------------------MODAL 5------------------------------------- -->
 <div id="sec5" class="modal" style="background-color: #fff;">
          
-<form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('import5') }}" method="POST" enctype="multipart/form-data">
            {{ csrf_field() }}
 
             <div class="card card-white">
-                
+                  <div class="card-header">
+                   @if (session('status5'))
+                <div class="alert alert-success" role="alert">
+                   {{ session('status5') }}
+                   </div>
+                 @endif
+                 </div>
                 <div class="card-body">
                     <p class="text-dark text-center mb-2"><strong>Entrer le fichiers excel du PV L2</strong></p>
                      
                 
                 <p class="text-dark mb-2" style="text-align: left;"><strong>PV de délibération L2 de cette année : </strong></p>
-                <input type="file" name="file" class="form-control"><br>
+                <input type="file" name="file05" class="form-control"><br>
                 <br>
                 <button class="btn btn-success">Importer le PV L2</button>
                 
